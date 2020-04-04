@@ -1,0 +1,1256 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Тренажер для закупок</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <script src="https://use.fontawesome.com/99a9553d81.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/brands.min.js"
+    integrity="sha384-KASsDRWwlErb8dTf+e5TxRXMnbXrVlbPbn1hS5B/yS4vNsF7mHHO+Gw1bBDhcyOt"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/conflict-detection.min.js"
+    integrity="sha384-fHnSzPZE3xYvvXY0y51vln9J+Jd0eK4HughCkcA0NsBpmAGgU97n65RbDqUgnWf1"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"
+    integrity="sha384-H4naMsxnUrIT8qihjWfwIKXi5biIYnqUsQ+vIJGZIKfA+7/O3FxgvMrdH77X+aID"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/regular.min.js"
+    integrity="sha384-yUk5aOIIy62R2bRFbFq0+bo+ChWYs75cusETAJ1KYvEMRiEbQZmNU6u+PK60t536"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/solid.min.js"
+    integrity="sha384-OSCcNUu98kEBVxq0vZaBr0wdmmd2ojuJwvWuSRKD0V10PWmvTetja8mxGfZm5PsV"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+      
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+       Date.prototype.addMinutes = function (minutes) {
+          this.setMinutes(this.getMinutes() + minutes);
+          return this;
+        };
+        Date.prototype.addSeconds = function (seconds) {
+          this.setSeconds(this.getSeconds() + seconds);
+          return this;
+        };
+  </script>
+  <style>
+    /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+    /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+    p.lead {
+      padding-left: 15px;
+
+    }
+
+    div.container {
+      max-width: 100%;
+      padding-bottom: 80px;
+    }
+
+    .pt-3-half {
+      padding-top: 1.4rem;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      background: yellow;
+    }
+
+    .custom-range::-webkit-slider-thumb:active {
+      background-color: yellow;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      box-shadow: yellow;
+    }
+
+
+    /*шапка*/
+    header {
+      height: 150px;
+    }
+
+    /*фиксированное плавающее меню*/
+    #top_nav {
+      top: 0px;
+      /*высота шапки в пикселях*/
+      position: fixed;
+      z-index: 200;
+    }
+
+    /*фиксированное плавающее меню*/
+    #top_buttons {
+      top: 160px;
+      /*высота шапки в пикселях*/
+      position: fixed;
+      z-index: 200;
+    }
+
+    /* div.dic-economy {
+      padding-left: 30px;
+    } */
+
+    /* @keyframes shadow-pulse {
+      0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+      }
+
+      100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+      }
+    }
+
+    .example-1 {
+      animation: shadow-pulse 1s infinite;
+    } */
+
+
+
+
+    /* .container{
+    max-width: 100%;
+} */
+
+    /* span.form-control{
+      width: 100%;
+    } */
+    .table td.nowrap {
+      white-space: nowrap;
+    }
+    .first{
+     z-index: 1;
+
+ }
+    .second{
+    z-index: -1;
+}
+    /* .table th { */
+    /* white-space: nowrap; */
+    /* width: 1%; */
+    /* } */
+    /* .table th.limit {
+      width: 3000px;
+    } */
+    #customRange1 {
+      width: 120px;
+    }
+
+    .pulse {
+      overflow: visible;
+      position: relative;
+    }
+
+    /* svg.fa-save {
+      display: none
+    } */
+    .pulse:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: inherit;
+      border-radius: inherit;
+      transition: opacity .3s, transform .3s;
+      animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse-animation {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  
+  <!-- Конец джумботрона -->
+
+  <!-- <div class="col-md-12" id="top_nav"> -->
+  <div class="dic-economy" id="top_nav">
+    <!-- <h4 class="card-header text-center font-weight-bold text-uppercase py-4"> -->
+    <!-- <div class="input-group  mb">
+              <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold text-success" id="top_economy">Экономия: </span>
+              </div>
+              <span type="text-md" class="form-control w-25" id="economy" value="2 000 000 000">2 000 000
+                000</span>
+                
+            </div> -->
+    <div class="input-group  mb">
+      <table class="table-sm table-dark table-striped table-bordered" id="table1">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Начальный баланс средств</th>
+            <th scope="col">Текущий баланс средств</th>
+            <th scope="col">%</th>
+            <th scope="col">План снижения</th>
+            <th scope="col">Снижение от плана</th>
+            
+            <th scope="col">%</th>
+            <th scope="col">Экономия</th>
+            <th scope="col">ГОР</th>
+            <th scope="col">ВИТ</th>
+            <th scope="col">ЗЕЛ</th>
+            <th scope="col">ВСЕ</th>
+            <th scope="col">ФИО</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span type="text-md" class="form-control nowrap" >Наши</span>
+              <span type="text-md" class="form-control nowrap" >Не наши</span>
+              <span type="text-md" class="form-control nowrap" >Всего</span>
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" >{{.SumOfOurInitialPrices}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumOfNotOurInitialPrices}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SummOfAllInitialPrices}}</span>
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" >{{.SumOurFallRub}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumNotOurFallRub}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumAllFallRub}}</span>
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" >{{.SumOurFallPercent}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumNotOurFallPercent}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumAllFallPercent}}</span>
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap" >{{.SumOurPlanFallLimit}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumNotOurPlanFallLimit}}</span>
+              <span type="text-md" class="form-control nowrap" >{{.SumAllPlanFallLimit}}</span>
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap">{{.SumOurAdditionalFall}}</span>
+              <span type="text-md" class="form-control nowrap">{{.SumNotOurAdditionalFall}}</span>
+              <span type="text-md" class="form-control nowrap">{{.SumAllAdditionalFall}}</span>
+            </td>
+         
+            <td> 
+              <span type="text-md" class="form-control nowrap">{{.SumOurPlanFallLimitPercent}}</span>
+              <span type="text-md" class="form-control nowrap">{{.SumNotOurPlanFallLimitPercent}}</span>
+              <span type="text-md" class="form-control nowrap">{{.SumAllPlanFallLimitPercent}}</span>
+            </td>
+            <td> <span type="text-md" class="form-control nowrap" id="economy">{{.Economy}}</span></td>
+            <!-- <td> 
+              <span type="text-md" class="form-control nowrap">ГОР</span>
+              <span type="text-md" class="form-control nowrap">ВИТ</span>
+              <span type="text-md" class="form-control nowrap">ЗЕЛ</span>
+            </td> -->
+            <!-- <td> 
+              <span type="text-md" class="form-control nowrap">{{.SumOurPlanFallLimitPercent}}%</span>
+              <span type="text-md" class="form-control nowrap">{{.SumNotOurPlanFallLimitPercent}}%</span>
+              <span type="text-md" class="form-control nowrap">{{.SumAllPlanFallLimitPercent}}%</span>
+            </td> -->
+            <td> 
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+            </td>       
+            <td> <input type="text-md" class="form-control nowrap" id = "FIO"></td>    
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- </h4> -->
+  </div>
+  <!-- </div> -->
+  <div class=" parent-of-tables">
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="btn-group-vertical second" id="top_buttons">
+        <input type="checkbox" data-toggle="toggle" data-on="РЕДАКТИРОВАТЬ" data-off="СОХРАНИТЬ" id="regime-switch"
+          checked data-onstyle="danger" data-offstyle="outline-success" class="first">
+        <!-- <a href="#!" class="text-primary" id="editRegime"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        <a href="#!" class="text-success" id="safeRegime"> <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></a> -->
+
+
+
+        <div class="btn-group-vertical" id="buttonList">
+          <button class="btn btn-warning scroll-to-table pulse first"><br>&nbsp;&nbsp;1</button>
+          <button class="btn btn-danger scroll-to-table pulse"><br>&nbsp;&nbsp;2</button>
+          <button class="btn btn-outline-primary scroll-to-table"> <br>&nbsp;&nbsp;3</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;4</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;5</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;6</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;7</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;8 </button>
+        </div>
+        <span class="table-add float-center mb-3 mr-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#!"
+            class="text-primary"><i class="fas fa-plus fa-1x" aria-hidden="true" id="tableAdder"></i></a></span>
+
+      </div>
+    </div>
+    <div class="col-md-12">
+      
+       
+      {{range .Data}}
+      
+
+        <!-- Editable table -->
+        <!-- <div class="card"> -->
+
+        <h2 class="card-header text-right font-weight-bold text-uppercase py-4">Набор {{.TableNumber}}<span
+            class="tr-add float-right mb-3 mr-2 edit-regime" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#!"
+              class="text-danger"><i class="fas fa-times fa-1x" aria-hidden="true"></i></a></span>
+        </h2>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+        <!-- <div class="card-body">
+            <div id="table" class="table-editable"> -->
+
+        <span class="tr-add float-right mb-3 mr-2 edit-regime" style="display: none;"><a href="#!" class="text-success"><i
+              class="fas fa-plus fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+              <form id="form1">
+        <table class="table table-sm table-bordered table-responsive-md table-striped text-center table-editable table-auctions" id="table">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 1%"><i class="fas fa-list-ol"></i>
+              <th class="text-center" style="width: 1%">Лот</th>
+         
+              <th class="text-center" style="width: 12%">Реестровый №</th>
+              <th class="text-center" style="width: 12%">НМЦК</th>
+              <th class="text-center" style="width: 1%;" >Наш</th>
+              <th class="text-center" style="width: 6%">Плановый лимит</th>
+              <th class="text-center" style="width: 20%">Лимит снижения</th>
+
+     
+              <!-- <th class="text-center" style="width: 12%">Доп. снижение</th> -->
+
+      
+
+              <th class="text-center" style="width: 12%">Наше и <br> общее <br> снижение, %</th>
+              <th class="text-center" style="width: 12%">Текущее снижение</th>
+              <th class="text-center" style="width: 12%">Отклонение от плана</th>
+ 
+
+              <th class="text-center" style="width: 12%">Ответственный за лимит</th>
+              <th class="text-center" style="width: 20%">Запретить участие?</th>
+              <!-- <th class="text-center" style="width: 12%">Ответственный за участие в аукционе</th> -->
+              <th class="text-center edit-regime" style="width: 6%; display: none;">Порядок</th>
+              <th class="text-center edit-regime" style="display: none;">Удалить</th>
+            </tr>
+          </thead>
+          <tbody>
+
+              {{range .Table}}
+              <script>
+                console.log({{.EconomyRub}})
+              </script>
+                    {{if .AreWeInvolved}}
+                    
+                    {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                            <tr class="table-success second">
+                        {{ else }}
+                            <tr class="bg-dark second">
+                        {{ end }}
+                    {{ else }}
+
+                        {{if .OurAuction}}
+                            <!-- {{if .RedTR}}
+                            <tr class="table-danger second">
+                            {{ else }} -->
+                            <tr class="table-primary second">
+                            <!-- {{ end }} -->
+                        {{ else }}
+                        <tr class="table-warning second">
+                        {{ end }}
+
+                    {{ end }}
+                    {{ else }}  
+                    <tr class="table-light"></tr>
+                      {{ end }}
+              <td class="pt-3-half font-weight-bold nowrap">
+                <span type="text-md" class="form-control"
+                  >{{.Priority}}</span>
+                </td>
+               <td class="pt-3-half font-weight-bold nowrap">
+                  <span type="text-md" class="form-control"
+                    >{{.LotNumber}}</span>
+                    <span type="text-md" class="form-control"
+                  >{{.NumberOfVehicles}}</span>
+               </td>
+               
+                
+             </td>
+              <td class="pt-3-half font-weight-bold"> 
+                <!-- <span class="font-weight-bold">{{.Title}} </span> -->
+                {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                       <span class="{{.PulseTR}} first">{{.Title}}</span>
+                    {{ else }}
+                       <span class="{{.PulseTR}} first badge badge-danger ">{{.Title}}</span>
+                    {{ end }}
+                {{ else }}
+                    <span class="{{.PulseTR}} first">{{.Title}}</span>
+                {{ end }}  
+                <br> 
+                <span class="text-danger font-weight-bold"> 
+                  {{if .ShowTimer}}
+                  <a href="#!" class="text-primary">
+                    <i aria-hidden="true" id="tableAdder">?</i>
+                  </a>
+                  {{ else }}
+                  <span class="font-weight-bold" id="demo{{.Title}}"> </span>
+                  {{ end }}
+                </span>
+              </td>
+              <td class="pt-3-half font-weight-bold nowrap">
+                <span type="text-md" class="form-control"
+                  >{{.InitialPrice}}</span>
+                  <span type="text-md" class="form-control"
+                  >0.5% = {{.HalfPercentOfInitialPrice}}</span>
+                </td>
+
+                {{if .OurAuction}}
+                <td class="pt-3-half nowrap the-chosen-one first" contenteditable="true"><input type="checkbox" data-toggle="toggle"
+                  data-on="✓" data-off="✘" data-onstyle="primary" data-style="quick" checked></td>
+                {{ else }}
+                <td class="pt-3-half nowrap the-chosen-one first" contenteditable="true"><input type="checkbox" data-toggle="toggle"
+                  data-on="✓" data-off="✘" data-onstyle="primary" data-style="quick"></td>
+                {{ end }}               
+                <td class="pt-3-half nowrap"> <span type="text-md" class="form-control">{{.PlanFallLimit}}</span>
+                  <span type="text-md" class="form-control"
+                  id="economy">{{.PlanFallLimitRub}}</span></td>
+              <td class="pt-3-half nowrap">
+                <input type="text" class="form-control text-center fall-limit"  value="{{.FallLimit}}">
+                <!-- <input type="range" class="custom-range" value="{{.FallLimit}}" min="0" max="25" step="0.5" id="customRange1"
+                  oninput="changeOffer(this)"></td> -->
+                  <span type="text-md" class="form-control"
+                  id="economy" >{{.FallLimitRub}}</span>
+        
+              </td>
+              <!-- <td class="pt-3-half nowrap" contenteditable="true"> <span type="text-md" class="form-control"
+                  >{{.AdditionalFallPercent}}</span>
+                  <span type="text-md" class="form-control"
+                  >{{.AdditionalFallRub}}</span></td> -->
+     
+             
+
+              <td class="pt-3-half nowrap"> 
+                {{if .DoWeHaveInformationAboutCurrentFall}}
+                <span type="text-md" class="form-control">{{.OurFall}}</span>
+                {{else}}
+                <a href="#!" class="text-primary"><i aria-hidden="true">?</i></a>
+                {{end}}
+                {{if .DoWeHaveInformationAboutCurrentFall}}
+                <span type="text-md" class="form-control">{{.Fall}}</span>
+                {{else}}
+                <a href="#!" class="text-primary"><i aria-hidden="true">?</i></a>
+                {{end}}
+              </td> 
+              <!-- <td class="pt-3-half nowrap" contenteditable="true">
+
+                
+              </td> -->
+              <td class="pt-3-half nowrap" contenteditable="true">
+                {{if .DoWeHaveInformationAboutCurrentFall}}
+                <span type="text-md" class="form-control">{{.FallRub}}</span>
+                {{else}}
+                <a href="#!" class="text-primary"><i aria-hidden="true">?</i></a>
+                {{end}}     
+                {{if .DoWeHaveInformationAboutCurrentFall}}
+                <span type="text-md" class="form-control">+0.5 = {{.fallRubPlus05}}</span>
+                {{else}}
+                <a href="#!" class="text-primary"><i aria-hidden="true">?</i></a>
+                {{end}}          
+              </td>
+ 
+              <td class="pt-3-half nowrap">
+                
+                <span type="text-md" class="form-control">{{.EconomyPercent}}</span>
+                <span type="text-md" class="form-control">{{.EconomyRub}}</span>
+                <!-- <a href="#!" class="text-primary"><i aria-hidden="true">?</i></a> -->
+                <!-- <a href="#!" class="text-primary"><i  aria-hidden="true">?</i></a> -->
+              </td>
+      
+              <td class="pt-3-half font-weight-bold">
+                {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                        <span class="{{.PulseTR}} first">{{.PersonResponsibleForLimit}}</span>
+                    {{ else }}
+                        <span class="{{.PulseTR}} first text-light">{{.PersonResponsibleForLimit}}</span>
+                    {{ end }}
+                {{ else }}
+                    <span class="{{.PulseTR}} first">{{.PersonResponsibleForLimit}}</span>
+                {{ end }}
+              </td>
+              <td class="pt-3-half font-weight-bold areWeInvolved nowrap" >
+                {{if .AreWeInvolved}}
+                <input type="checkbox" data-toggle="toggle"
+                data-on="✓" data-off="✘" data-onstyle="warning" data-offstyle="outline-dark" checked>
+            
+                {{ else }}   
+                <input type="checkbox" data-toggle="toggle"
+                data-on="✓" data-off="✘" data-onstyle="primary" data-offstyle="outline-dark" id="myDiv">
+                
+                {{ end }}
+                <br>
+                <span class="{{.PulseTR}} first"> {{.PersonResponsibleForInvolve}}</span>
+               
+              </td>  
+              <!-- <td class="pt-3-half font-weight-bold">
+                {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                        <span class="{{.PulseTR}} first">{{.PersonResponsibleForInvolve}}</span>
+                    {{ else }}
+                        <span class="{{.PulseTR}} first text-light">{{.PersonResponsibleForInvolve}}</span>
+                    {{ end }}
+                {{ else }}
+                    <span class="{{.PulseTR}} first">{{.PersonResponsibleForInvolve}}</span>
+                {{ end }}
+             
+              </td>                       -->
+              <td class="pt-3-half edit-regime" style="display: none;">
+                
+                <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up"
+                      aria-hidden="true"></i></a></span>
+                <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down"
+                      aria-hidden="true"></i></a></span>
+              </td>
+              <td class="edit-regime"style="display: none;">
+                <span class="table-remove"><button type="button"
+                    class="btn btn-danger btn-rounded btn-sm my-0">Удалить</button></span>
+              </td>
+            </tr>
+            <!-- This is our clonable table line -->
+            {{if .ShowTimer}}
+            {{ else }}
+            <script>
+              (function () {
+                
+              
+              unix_timestamp = {{.TimeWhenWeGetMinutesBeforeLimit}}
+              // console.log(unix_timestamp)
+              var date = new Date(unix_timestamp * 1000);
+
+              var countDownDate = date.addMinutes(Number({{.MinutesToNextStepOverLimit}})).addSeconds(1).getTime();
+              var xTimer = setInterval(function () {
+                // Get today's date and time
+                var now = new Date().getTime();
+                // Find the distance between now and the count down date
+                distance = countDownDate - now;
+            
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                minutes = checkTime(minutes)
+                seconds = checkTime(seconds)
+                // Display the result in the element with id="demo"
+                //document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                document.getElementById("demo{{.Title}}").innerHTML = minutes + ":" + seconds;
+                // If the count down is finished, write some text
+                if (distance < 0 || document.getElementById("demo{{.Title}}").innerHTML == "ВРЕМЯ ИСТЕКЛО") {
+                  clearInterval(xTimer);
+                  // clearTimeout(timer);
+                  $('#auctionIsOver').modal('show');
+                  document.getElementById("demo{{.Title}}").innerHTML = "ВРЕМЯ ИСТЕКЛО";
+                  // localStorage.removeItem({{.AuctionID }})
+                  // localStorage.removeItem({{.AuctionID }} + '_aferOffer')
+                }
+              }, 1000);
+            })();
+
+        </script>
+        {{ end }}
+            {{end}}
+
+
+
+          </tbody>
+        </table>
+      </form>
+        <!-- </div>
+          </div>
+        </div> -->
+        <!-- Editable table -->
+      </div>
+        {{end}}
+      
+      
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div id="memo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Памятка</h4>
+          <button class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body">
+          <div><span class="font-weight-bold">1) Зависание комьютера:</span> перезагрузить вкладку браузера, если не
+            получается - перезагрузить компьютер.
+          </div>
+          <div><span class="font-weight-bold">2) Отключение интернета:</span> сменить источник интернета. </div>
+          <div><span class="font-weight-bold">3) Отключение площадки:</span> взять телефон и начать снимать видео,
+            на
+            котором у Вас не работает площадка,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div><span class="font-weight-bold">4) Не подается предложение:</span> взять телефон и начать снимать
+            видео, на котором у Вас работает площадка,
+            но не подается предложение,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div class="modal-footer">
+            <div lass="btn-group btn-group-justified" role="group">
+              <div class="btn-group col-md-12" data-toggle="buttons">
+                <button class="btn btn-primary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="http://malsup.github.com/jquery.form.js"></script> 
+  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"></script> -->
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"> -->
+  <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
+
+
+
+  <!-- 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/signed-num.js"></script> -->
+
+
+
+
+
+  <!-- <script>$(document).ready(function () {
+      $('#example').DataTable({
+        columnDefs: [
+          { type: 'signed-num', targets: 0 }
+        ]
+      });
+    });
+    </script> -->
+  <!-- <script>
+    youCanGoToAuction = true
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    $('a').on('click', function (e) {
+      if (getRandomInt(1, 10) > 7 || !youCanGoToAuction) {
+        youCanGoToAuction = false
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    })
+
+  </script> -->
+  <script> $('#FIO')[0].value = localStorage.getItem('UserName')</script>
+  <script>
+
+    economyValue = {{.Economy}}
+    var economyAccumulator
+    function roundUp(num, precision) {
+      precision = Math.pow(10, precision)
+      return Math.ceil(num * precision) / precision
+    }
+    function localeString(x, sep, grp) {
+      var sx = ('' + x).split('.'), s = '', i, j;
+      sep || (sep = ' '); // default seperator
+      grp || grp === 0 || (grp = 3); // default grouping
+      i = sx[0].length;
+      while (i > grp) {
+        j = i - grp;
+        s = sep + sx[0].slice(j, i) + s;
+        i = j;
+      }
+      s = sx[0].slice(0, i) + s;
+      sx[0] = s;
+      return sx.join('.');
+    }
+    const $tableID = $('#table');
+    const $BTN = $('#export-btn');
+    const $EXPORT = $('#export');
+
+    const newTr = `
+    <tr class="hide">
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half">
+        <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+        <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+      </td>
+      <td>
+        <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+      </td>
+    </tr>`;
+
+    
+
+    // $('.table-add').on('click', 'i', () => {
+    $('.tr-add').on('click', function (e) {
+      // const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+
+      // if ($tableID.find('tbody tr').length === 0) {
+
+      //   $('tbody').append(newTr);
+      // }
+
+      // $tableID.find('table').append($clone);
+      var tr = '<tr>\
+          <th scope="row">'+ 0372200004520000372 + '</th>\
+          <td>' + 2058973825.39 + '</td>\
+          <td>'+ 0 + '</td>\
+          <td>'+ 'Федоров Федор Федорович' + '</td>\
+          </tr>';
+      $('#table1').append(tr);
+
+    });
+    $('.table-add').on('click', function (e) {
+      numberOfTables = $('*.card-header').length + 1
+      // var tr = '<tr>\
+      //     <th scope="row">'+ 0372200004520000372 + '</th>\
+      //     <td>' + 2058973825.39 + '</td>\
+      //     <td>'+ 0 + '</td>\
+      //     <td>'+ 'Федоров Федор Федорович' + '</td>\
+      //     </tr>';
+      var table = "\
+      <div class=\"container\">\
+        <div class=\"card\">\
+          <h3 class=\"card-header text-center font-weight-bold text-uppercase py-4\">Набор "+ numberOfTables + "\
+          </h3>\
+          <div class=\"card-body\">\
+            <div id=\"table\" class=\"table-editable\">\
+              <span class=\"tr-add float-right mb-3 mr-2\"><a href=\"#!\" class=\"text-success\"><i\
+                    class=\"fas fa-plus fa-2x\" aria-hidden=\"true\"></i></a></span>\
+              <table class=\"table table-sm table-bordered table-responsive-md table-striped text-center\" id=\"table"+ numberOfTables + "\">\
+                <thead>\
+                  <tr>\
+                    <th class=\"\text-center\" style=\"width: 12%\">Реестровый №</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Начальная цена</th>\
+                    <th class=\"text-center\" style=\"width: 20%\">Лимит снижения, %</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Лимит снижения, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Итоговое снижение, %</th>\
+                    <th class=\"text-center\" style=\"width: 18%\">Итоговое снижение, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Экономия, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Ответственный за лимит</th>\
+                    <th class=\"text-center\" style=\"width: 6%\">Порядок</th>\
+                    <th class=\"text-center\">Удалить</th>\
+                  </tr>\
+                </thead>\
+                <tbody>\
+                  <tr>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\">\
+                      <input type=\"text\" class=\"form-control\" value=\"0\">\
+                      <input type=\"range\" class=\"custom-range\" value=\"0\" min=\"0\" max=\"100\" step=\"0.5\"\
+                        id=\"customRange1\" oninput=\"changeOffer(this)\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                      <span class=\"table-up\"><a href=\"#!\" class=\"indigo-text\"><i class=\"fas fa-long-arrow-alt-up\"\
+                            aria-hidden=\"true\"></i></a></span>\
+                      <span class=\"table-down\"><a href=\"#!\" class=\"indigo-text\"><i class=\"fas fa-long-arrow-alt-down\"\
+                            aria-hidden=\"true\"></i></a></span>\
+                    </td>\
+                    <td>\
+                      <span class=\"table-remove\"><button type=\"button\"\
+                          class=\"btn btn-danger btn-rounded btn-sm my-0\">Remove</button></span>\
+                    </td>\
+                  </tr>\
+                </tbody>\
+              </table>\
+            </div>\
+          </div>\
+        </div>\
+</div>\
+      ";
+
+      $('.btn.scroll-to-table').unbind()
+      tableButton = '<button class="btn btn-outline-primary scroll-to-table">' + numberOfTables + '</button>'
+      $('#buttonList')[0].innerHTML += tableButton
+      $('div.parent-of-tables').append(table);
+      $('.btn.scroll-to-table').on('click', function (e) {
+        elToSc = e
+        targetEl = elToSc.target.innerText
+        elemToScrol = $('h3:contains(' + elToSc.target.innerText.replace("  ", "") + ')')[0]
+        $(elemToScrol).get(0).scrollIntoView();
+      });
+
+    });
+    $tableID.on('click', '.table-remove', function () {
+
+      $(this).parents('tr').detach();
+    });
+
+    $tableID.on('click', '.table-up', function () {
+console.log("up")
+      const $row = $(this).parents('tr');
+
+      if ($row.index() === 1) {
+        return;
+      }
+
+      $row.prev().before($row.get(0));
+    });
+
+    $tableID.on('click', '.table-down', function () {
+      console.log("down")
+      const $row = $(this).parents('tr');
+      $row.next().after($row.get(0));
+    });
+
+    // A few jQuery helpers for exporting only
+    jQuery.fn.pop = [].pop;
+    jQuery.fn.shift = [].shift;
+
+    $BTN.on('click', () => {
+
+      const $rows = $tableID.find('tr:not(:hidden)');
+      const headers = [];
+      const data = [];
+
+      // Get the headers (add special header logic here)
+      $($rows.shift()).find('th:not(:empty)').each(function () {
+
+        headers.push($(this).text().toLowerCase());
+      });
+
+      // Turn all existing rows into a loopable array
+      $rows.each(function () {
+        const $td = $(this).find('td');
+        const h = {};
+
+        // Use the headers from earlier to name our hash keys
+        headers.forEach((header, i) => {
+
+          h[header] = $td.eq(i).text();
+        });
+
+        data.push(h);
+      });
+
+      // Output the result
+      $EXPORT.text(JSON.stringify(data));
+    });
+    var rangeEl
+    var priceFall
+    var  priceFallMinusGlobalFall
+
+    function changeOffer(that) {
+      rangeEl = that
+      $(that).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+      currentNMCK = Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText.replace(/[^0-9.]/g, ""))
+      priceFall = roundUp(currentNMCK - Number(rangeEl.value) * currentNMCK/100,2)
+      $('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText = localeString(priceFall)
+      // priceFallMinusGlobalFall = (rangeEl.value - Number($("input.custom-range")[0].value)) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+      priceFallMinusGlobalFall = (rangeEl.value) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText.replace(/[^0-9.]/g, "")) / 100
+
+      // $('#economy')[0].innerText = localeString(roundUp(economyValue - priceFallMinusGlobalFall,2))
+  
+      if  (!$('#regime-switch')[0].checked){
+        $(rangeEl).closest('tr').find('span')[8].innerText = that.value//
+        $(rangeEl).closest('tr').find('span')[9].innerText =  $('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText
+      }
+      $(rangeEl).closest('tr').find('span')[7].innerText = Number(roundUp(Number($(rangeEl).closest('tr').find('span')[9].innerText.replace(/\s/g, '')) -  Number($('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText.replace(/\s/g, '')),2))
+      $($('tr')[3]).find('td:eq(15)').find('span')[0].innerText = $('#FIO')[0].value
+    }
+
+    function changeAllOffers(that) {
+      rangeEl = that
+      $(that).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+      customLength = $("input.custom-range").length
+      for (let i = 1; i <= customLength - 1; i++) {
+        $("input.custom-range")[i].value = that.value
+        $($("input.custom-range")[i]).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+        priceFall = $("input.custom-range")[i].value * Number($($("input.custom-range")[i]).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+        $($("input.custom-range")[i]).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText = roundUp(priceFall, 2)
+      }
+      economyValue =  {{.Economy}}
+      $('#economy')[0].innerText = localeString(2000000000)
+      // priceFall = rangeEl.value * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+      // $(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText = priceFall
+
+      // $('#economy')[0].innerText = localeString(Number(economyValue.replace(/[^0-9.]/g, "")) - priceFall)
+    }
+    var etarget
+    $('#editRegime').on('click', function (e) {
+      $('.edit-regime').show()
+      etarget = e.target
+      e.target.style.display = "none"
+      $('svg.fa-save')[0].style.display = ""
+
+    })
+    $('#safeRegime').on('click', function (e) {
+     
+      $('.edit-regime').hide()
+      etarget = e.target
+      e.target.style.display = "none"
+      $('svg.fa-edit')[0].style.display = ""
+ 
+    })
+    $('.the-chosen-one').on('click', function (e) {
+      etarget = e.target
+      // console.log(etarget.closest(':has("input.custom-range")')[0])
+      if ($(etarget.closest('tr')).find('input:checkbox')[1].checked){
+        
+      if ($(etarget.closest('td')).find('input')[0].checked){
+        etarget.closest('tr').className = "table-warning"
+      }else{
+        etarget.closest('tr').className = "table-primary"
+      }
+      }else{
+        etarget.closest('tr').className = ""
+      }
+    })
+
+
+
+var etarget
+    $('.areWeInvolved').on('click', function (e) {
+      etarget = e.target
+      // console.log(etarget.closest(':has("input.custom-range")')[0])
+      var areWeInvolved
+      if (!$(etarget.closest('td')).find('input')[0].checked){
+        areWeInvolved = true
+  
+        etarget.closest('tr').className = etarget.closest('tr').className.replace("table-dark","") 
+        if ($($(etarget.closest('tr'))[0].children[4]).find('input')[0].checked){
+          etarget.closest('tr').className = "table-primary"
+        }else{
+          etarget.closest('tr').className = "table-warning"
+        }
+      }else{
+        etarget.closest('tr').className = "table-light"
+      }
+      $(etarget.closest('tr')).find('td:eq(11)').find('span')[1].innerText = $('#FIO')[0].value
+      setActPermission(e.target,areWeInvolved)
+
+    })
+
+    function setActPermission(that, areWeInvolved){
+
+      AuctionID = $(that).closest('tr').find('td:eq(2)').find('span')[0].innerText
+
+      var areWeInvolvedAjax 
+      if (areWeInvolved){
+        areWeInvolvedAjax = '1'
+      }else{
+        areWeInvolvedAjax = '0'
+      }
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              User: $('#FIO')[0].value,
+              Method: 'setActPermission',
+              AuctionID: AuctionID,
+              AreWeInvolved: areWeInvolvedAjax
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+    
+  </script>
+
+  <script>
+    var h_hght = 0; // высота шапки
+    var h_mrg = 0;    // отступ когда шапка уже не видна
+
+    var h_hghtButtons = 160; // высота шапки
+    var h_mrgButtons = 160;    // отступ когда шапка уже не видна
+
+    $(function () {
+
+      var elem = $('#top_nav');
+      var top = $(this).scrollTop();
+
+      if (top > h_hght) {
+        elem.css('top', h_mrg);
+      }
+
+      $(window).scroll(function () {
+        top = $(this).scrollTop();
+
+        // if (top + h_mrg < h_hght) {
+        //   elem.css('top', (h_hght - top));
+        // } else {
+        elem.css('top', h_mrg);
+        // }
+      });
+
+    });
+    $(function () {
+
+      var elem = $('#top_buttons');
+      var top = $(this).scrollTop();
+
+      if (top > h_hghtButtons) {
+        elem.css('top', h_mrgButtons);
+      }
+
+      $(window).scroll(function () {
+        top = $(this).scrollTop();
+
+        if (top + h_mrgButtons < h_hghtButtons) {
+          elem.css('top', (h_hghtButtons - top));
+        } else {
+          elem.css('top', h_mrgButtons);
+        }
+      });
+
+    });
+
+
+    $(function () {
+      // var  elemswith
+      $('#regime-switch').change(function (e) {
+
+        if (e.target.checked) {
+          $('.edit-regime').hide()
+          var TableData = ""
+          var numberOfTable = 0
+          $('table.table-auctions tr').each(function(row, tr){
+            if ($(tr).find('th').length == 0){
+              TableData = TableData 
+              
+                  + $(tr).find('td:eq(2)').find('span')[0].innerText + '&'  // Реестровый №
+                  + $(tr).find('td:eq(3)').find('span')[0].innerText + '&'  // НМЦК
+                  + $(tr).find('td:eq(4)').find('input')[0].checked + '&'  // Наш
+                  + $(tr).find('td:eq(6)').find('input.form-control')[0].value + '&'  // Лимит снижения, %
+                  + $(tr).find('td:eq(5)').find('span')[0].innerText + '&' // Плановый лимит, %
+                  + $(tr).find('td:eq(10)').find('span')[0].innerText + '&' //ФИО
+                  + '\n';
+              }else{
+                  numberOfTable += 1
+                  TableData = TableData + numberOfTable + '\n' //Номер таблицы
+              }
+              console.log(TableData)
+          });
+          $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              user: $('#FIO')[0].value,
+              Method: 'SavePreSettings',
+              TableData : TableData 
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+        } else {
+          $('.edit-regime').show()
+
+        }
+
+        // $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+      })
+    })
+  </script>
+  <script>
+
+    var elToSc
+
+    $('.btn.scroll-to-table').on('click', function (e) {
+      elToSc = e
+      targetEl = elToSc.target.innerText
+      elemToScrol = $('h3:contains(' + elToSc.target.innerText.replace("  ", "") + ')')[0]
+      $(elemToScrol).get(0).scrollIntoView();
+    });
+
+//     $(document).on('keypress',function(e) {
+//     if(e.which == 13) {
+//         alert('You pressed enter!');
+//     }
+// });
+
+
+
+
+
+    $('#FIO').on('keydown', function (e) {
+      localStorage.setItem('UserName', e.target.value);
+    })
+
+    $('.fall-limit').on('keydown', function (e) {
+      var prevValue = e.target.value;//$(this)[0].value;
+      setTimeout(function () {
+        var price = e.target
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\.\d{0,2})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+          }
+        }
+        saveOurOffer(e.target)
+        return true;
+      }, 1);
+    })
+
+// var that1
+    function saveOurOffer(that) {
+      
+      $('tr').find('td:eq(3)').find('span')[1].innerText
+      currentNMCK = Number( $(that).closest('tr').find('td:eq(3)').find('span')[0].innerText.replace(/[^0-9.]/g, ""))
+      priceFall = roundUp(currentNMCK - Number(that.value) * currentNMCK/100,2)
+      $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText = localeString(priceFall)
+      $(that).closest('tr').find('td:eq(10)').find('span')[0].innerText = $('#FIO')[0].value
+ 
+
+     
+      // rrrr = priceFall
+      // $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText =  that.value
+      AuctionID = $(that).closest('tr').find('td:eq(2)').find('span')[0].innerText
+
+      if  (!$('#regime-switch')[0].checked){
+        $(that).closest('tr').find('td:eq(5)').find('span')[0].innerText = that.value
+        $(that).closest('tr').find('td:eq(5)').find('span')[1].innerText = $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText
+      }
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'ChangeFallLimit',
+              AuctionID: AuctionID,
+		          FallLimit: that.value
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+
+  </script>
+
+</body>
+
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Разработчик: Ермешев Марат, АО "Третий парк", ErmMarat@gmail.com</a>
+  <a href="https://docs.google.com/spreadsheets/d/1X3pOkI0VvRu07ULpOJUFIZ_NchbZQkgV7UhRoJjDZC4/edit#gid=1249905151"
+    class="nav-link">
+    <button class="btn btn-outline-success my-2 my-sm-0">Google Таблицы</button>
+  </a>
+
+</nav>
+
+</html>

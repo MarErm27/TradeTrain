@@ -1,0 +1,1665 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Bid simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <script src="https://use.fontawesome.com/99a9553d81.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/brands.min.js"
+    integrity="sha384-KASsDRWwlErb8dTf+e5TxRXMnbXrVlbPbn1hS5B/yS4vNsF7mHHO+Gw1bBDhcyOt"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/conflict-detection.min.js"
+    integrity="sha384-fHnSzPZE3xYvvXY0y51vln9J+Jd0eK4HughCkcA0NsBpmAGgU97n65RbDqUgnWf1"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"
+    integrity="sha384-H4naMsxnUrIT8qihjWfwIKXi5biIYnqUsQ+vIJGZIKfA+7/O3FxgvMrdH77X+aID"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/regular.min.js"
+    integrity="sha384-yUk5aOIIy62R2bRFbFq0+bo+ChWYs75cusETAJ1KYvEMRiEbQZmNU6u+PK60t536"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/solid.min.js"
+    integrity="sha384-OSCcNUu98kEBVxq0vZaBr0wdmmd2ojuJwvWuSRKD0V10PWmvTetja8mxGfZm5PsV"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+      
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+       Date.prototype.addMinutes = function (minutes) {
+          this.setMinutes(this.getMinutes() + minutes);
+          return this;
+        };
+        Date.prototype.addSeconds = function (seconds) {
+          this.setSeconds(this.getSeconds() + seconds);
+          return this;
+        };
+  </script>
+  <style>
+    /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+    /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+    p.lead {
+      padding-left: 15px;
+
+    }
+
+    div.container {
+      max-width: 100%;
+      padding-bottom: 80px;
+    }
+
+    .pt-3-half {
+      padding-top: 1.4rem;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      background: yellow;
+    }
+
+    .custom-range::-webkit-slider-thumb:active {
+      background-color: yellow;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      box-shadow: yellow;
+    }
+
+
+    /*шапка*/
+    header {
+      height: 150px;
+    }
+
+    /*фиксированное плавающее меню*/
+    #top_nav {
+      top: 0px;
+      /*высота шапки в пикселях*/
+      position: fixed;
+      z-index: 200;
+    }
+
+    /*фиксированное плавающее меню*/
+    #top_buttons {
+      top: 120px;
+      /*высота шапки в пикселях*/
+      position: fixed;
+      z-index: 200;
+    }
+
+    /* div.dic-economy {
+      padding-left: 30px;
+    } */
+
+    /* @keyframes shadow-pulse {
+      0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+      }
+
+      100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+      }
+    }
+
+    .example-1 {
+      animation: shadow-pulse 1s infinite;
+    } */
+
+
+
+
+    /* .container{
+    max-width: 100%;
+} */
+
+    /* span.form-control{
+      width: 100%;
+    } */
+    .nowrap {
+      white-space: nowrap;
+    }
+    .first{
+     z-index: 1;
+
+ }
+    .second{
+    z-index: -1;
+}
+    /* .table th { */
+    /* white-space: nowrap; */
+    /* width: 1%; */
+    /* } */
+    /* .table th.limit {
+      width: 3000px;
+    } */
+    #customRange1 {
+      width: 120px;
+    }
+
+    .pulse {
+      overflow: visible;
+      position: relative;
+    }
+
+    /* svg.fa-save {
+      display: none
+    } */
+    .pulse:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: inherit;
+      border-radius: inherit;
+      transition: opacity .3s, transform .3s;
+      animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse-animation {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+
+
+
+    /* rows */
+div.dropdown-multicol{
+  width: 30em;
+}
+div.dropdown-row>a.dropdown-item{
+  display:inline-block;
+  width: 32%;
+}
+
+/* Columns */
+div.dropdown-multicol2{
+  width: 30em;
+}
+div.dropdown-multicol2>div.dropdown-col{
+  display:inline-block;
+  width: 32%;
+}
+
+/*
+Or just:
+div.dropdown-row>a.dropdown-item{
+  display:inline-block;
+  width: 10em;
+}
+
+(Former may be more convenient for responsive)
+*/
+  </style>
+</head>
+
+<body>
+
+<script>
+  var countDownDate = new Object()
+  var xTimer = new Object()
+</script>
+  
+  <!-- Конец джумботрона -->
+
+  <!-- <div class="col-md-12" id="top_nav"> -->
+  <!-- <div class="dic-economy" id="top_nav"> -->
+    <!-- <h4 class="card-header text-center font-weight-bold text-uppercase py-4"> -->
+    <!-- <div class="input-group  mb">
+              <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold text-success" id="top_economy">Экономия: </span>
+              </div>
+              <span type="text-md" class="form-control w-25" id="economy" value="2 000 000 000">2 000 000
+                000</span>
+                
+            </div> -->
+    <div class="table-responsive dic-economy" id="top_nav">
+    
+      <table class="table-sm table-dark table-striped table-bordered" id="buttonTable">
+        <thead>
+          <tr>
+            <th scope="col" class="text-success">Экономия</th>
+            <th scope="col"></th>
+            <th scope="col">Сумма НМЦК</th>
+            <th scope="col">Текущее снижение</th>
+            <th scope="col">%</th>
+            <th scope="col">Стартовое снижения</th>
+            <th scope="col">Снижение от старта</th>
+            
+            <th scope="col">%</th>
+            
+
+            <th scope="col">Средний стартовый лимит</th>
+            <th scope="col">Средний текущий лимит</th>
+            <th scope="col">Разница лимитов</th>
+            <th scope="col">ГОР,%</th>
+            <th scope="col">ВИТ,%</th>
+            <th scope="col">ЗЕЛ,%</th>
+            <th scope="col">ВСЕ,%</th>
+            <th scope="col">ФИО</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> 
+              <span type="text-md" class="form-control nowrap" id="Economy">{{.Economy}}</span>
+              <span type="text-md" class="form-control nowrap" id="AwerageFallEconomy">{{.AwerageFallEconomy}}%</span>        
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" >Наши</span>
+              <span type="text-md" class="form-control nowrap" >Не наши</span>
+              <!-- <span type="text-md" class="form-control nowrap" >Всего</span> -->
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" id = "SumOfOurInitialPrices">{{.SumOfOurInitialPrices}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumOfNotOurInitialPrices">{{.SumOfNotOurInitialPrices}}</span>
+              <!-- <span type="text-md" class="form-control nowrap" >{{.SummOfAllInitialPrices}}</span> -->
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" id = "SumOurFallRub">{{.SumOurFallRub}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumNotOurFallRub">{{.SumNotOurFallRub}}</span>
+              <!-- <span type="text-md" class="form-control nowrap" >{{.SumAllFallRub}}</span> -->
+            </td>
+            <td>
+              <span type="text-md" class="form-control nowrap" id = "SumOurFallPercent">{{.SumOurFallPercent}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumNotOurFallPercent">{{.SumNotOurFallPercent}}</span>
+              <!-- <span type="text-md" class="form-control nowrap" >{{.SumAllFallPercent}}</span> -->
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "SumOurPlanFallLimit">{{.SumOurPlanFallLimit}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumNotOurPlanFallLimit">{{.SumNotOurPlanFallLimit}}</span>
+              <!-- <span type="text-md" class="form-control nowrap" >{{.SumAllPlanFallLimit}}</span> -->
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "SumOurAdditionalFall">{{.SumOurAdditionalFall}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumNotOurAdditionalFall">{{.SumNotOurAdditionalFall}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.SumAllAdditionalFall}}</span> -->
+            </td>
+         
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "SumOurPlanFallLimitPercent">{{.SumOurPlanFallLimitPercent}}</span>
+              <span type="text-md" class="form-control nowrap" id = "SumNotOurPlanFallLimitPercent">{{.SumNotOurPlanFallLimitPercent}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.SumAllPlanFallLimitPercent}}</span> -->
+            </td>
+
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurAverageStartLimit">{{.OurAverageStartLimit}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurAverageStartLimit">{{.NotOurAverageStartLimit}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.AllAverageStartLimit}}</span> -->
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurAverageFall">{{.OurAverageFall}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurAverageFall"> {{.NotOurAverageFall}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.AllAverageStartFall}}</span> -->
+            </td>
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurDifAverageFall">{{.OurDifAverageFall}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurDifAverageFall">{{.NotOurDifAverageFall}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.AllDifAverageStartFall}}</span> -->
+            </td>
+
+
+
+
+            <!-- <td> 
+              <span type="text-md" class="form-control nowrap">ГОР</span>
+              <span type="text-md" class="form-control nowrap">ВИТ</span>
+              <span type="text-md" class="form-control nowrap">ЗЕЛ</span>
+            </td> -->
+            <!-- <td> 
+              <span type="text-md" class="form-control nowrap">{{.SumOurPlanFallLimitPercent}}%</span>
+              <span type="text-md" class="form-control nowrap">{{.SumNotOurPlanFallLimitPercent}}%</span>
+              <span type="text-md" class="form-control nowrap">{{.SumAllPlanFallLimitPercent}}%</span>
+            </td> -->
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurVehiclesGor">{{.OurVehiclesGor}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurVehiclesGor">{{.NotOurVehiclesGor}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.GORVehiclesGor}}</span> -->
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurVehiclesVIT">{{.OurVehiclesVIT}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurVehiclesVIT">{{.NotOurVehiclesVIT}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.GORVehiclesVIT}}</span> -->
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurVehiclesZEL">{{.OurVehiclesZEL}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurVehiclesZEL">{{.NotOurVehiclesZEL}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.GORVehiclesZEL}}</span> -->
+            </td>       
+            <td> 
+              <span type="text-md" class="form-control nowrap" id = "OurVehiclesALL">{{.OurVehiclesALL}}</span>
+              <span type="text-md" class="form-control nowrap" id = "NotOurVehiclesALL">{{.NotOurVehiclesALL}}</span>
+              <!-- <span type="text-md" class="form-control nowrap">{{.AllVehiclesALL}}</span>          -->
+            </td>       
+            <!-- <td> 
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+              <span type="text-md" class="form-control nowrap"></span>
+            </td>        -->
+            <td> <input type="text-md" class="form-control nowrap" id = "FIO"></td>    
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- </h4> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <div class=" parent-of-tables">
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="btn-group-vertical second" id="top_buttons">
+        <input type="checkbox" data-toggle="toggle" data-on="РЕДАКТИРОВАТЬ" data-off="СОХРАНИТЬ" id="regime-switch"
+          checked data-onstyle="danger" data-offstyle="outline-success" class="first">
+        <!-- <a href="#!" class="text-primary" id="editRegime"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        <a href="#!" class="text-success" id="safeRegime"> <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></a> -->
+
+
+
+        <div class="btn-group-vertical" id="buttonList">
+          {{range .Data}}
+ 
+
+          <button class="btn btn-{{.BtnColor}} scroll-to-table first"><br>&nbsp;&nbsp;{{.TableNumber}}</button>
+     
+  
+          
+          {{end}}
+          <!-- <button class="btn btn-warning scroll-to-table pulse first"><br>&nbsp;&nbsp;1</button> -->
+          <!-- <button class="btn btn-danger scroll-to-table pulse"><br>&nbsp;&nbsp;2</button>
+          <button class="btn btn-outline-primary scroll-to-table"> <br>&nbsp;&nbsp;3</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;4</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;5</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;6</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;7</button>
+          <button class="btn btn-outline-primary scroll-to-table"><br>&nbsp;&nbsp;8 </button> -->
+        </div>
+        <span class="table-add float-center mb-3 mr-2 edit-regime" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#!"
+            class="text-primary"><i class="fas fa-plus fa-1x" aria-hidden="true" id="tableAdder"></i></a></span>
+
+      </div>
+    </div>
+    <div class="col-md-12">
+      
+       
+      {{range .Data}}
+      
+
+        <!-- Editable table -->
+        <!-- <div class="card"> -->
+   
+        <h6 class="card-header text-right font-weight-bold text-uppercase py-4">Набор {{.TableNumber}}<span
+            class="tr-add float-right mb-3 mr-2 edit-regime" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#!"
+              class="text-danger"><i class="fas fa-times fa-1x" aria-hidden="true"></i></a></span>
+        </h6>
+           <br>
+          <br>
+ 
+
+       <div class="container table-responsive">
+        <h3 class="form-control font-weight-bold text-center badge-{{.BtnColor}}">Набор {{.TableNumber}}: {{.ResponsibleFromGroupOne}}, {{.ResponsibleFromGroupTwo}}, {{.ResponsibleFromGroupThree}}</h3>
+ 
+        <!-- <div class="card-body">
+            <div id="table" class="table-editable"> -->
+
+        <span class="tr-add float-right mb-3 mr-2 edit-regime" style="display: none;"><a href="#!" class="text-success"><i
+              class="fas fa-plus fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+              <form id="form1">
+        <table class="table table-sm table-bordered table-responsive-md table-striped text-center table-editable table-auctions" id="table{{.TableNumber}}">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 1%">Лот и <br> Филиал</th>
+              <th class="text-center" style="width: 1%">Приоритет&nbsp;и <br> БК+СК1+СК2=ВСЕ</i>
+              
+         
+              <th class="text-center" style="width: 12%">Реестровый №</th>
+              <th class="text-center" style="width: 12%">НМЦК</th>
+              <th class="text-center" style="width: 1%;" >Наш</th>
+              <th class="text-center" style="width: 6%">Стартовый лимит</th>
+              <th class="text-center " style="width: 20%">Лимит снижения</th>
+
+     
+              <!-- <th class="text-center" style="width: 12%">Доп. снижение</th> -->
+
+      
+
+              <th class="text-center" style="width: 12%">Наше и <br> общее <br> снижение,&nbsp;%</th>
+              <th class="text-center" style="width: 12%">НМЦК снизилась на, руб</th>
+              <th class="text-center" style="width: 12%">Текущая цена контракта</th>
+              <th class="text-center" style="width: 12%">Отклонение от лимита снижения</th>
+              
+
+              <th class="text-center"  style="display: none;">Ответственный за лимит</th>
+              <th class="text-center" style="width: 20%">Запретить участие?</th>
+              <!-- <th class="text-center" style="width: 12%">Ответственный за участие в аукционе</th> -->
+              <th class="text-center edit-regime" style="width: 6%; display: none;">Порядок</th>
+              <th class="text-center edit-regime" style="display: none;">Удалить</th>
+            </tr>
+          </thead>
+          <tbody>
+
+              {{range .Table}}
+              <script>
+                // console.log({{.EconomyRub}})
+              </script>
+                    {{if .AreWeInvolved}}
+                    
+                        {{if .AuctionIsFinished}}
+                    
+                            {{if .WeWon}}
+                                <tr class="table-success second">
+                            {{ else }}
+                                <tr class="bg-dark second">
+                            {{ end }}
+                        {{ else }}
+                       
+                            {{if .OurAuction}}
+                            <!-- <script>
+                              console.log({{.Title}})
+                            </script> -->
+                            <tr class="table-primary second">
+                               <!-- {{if .RedTR}}
+                                
+                               {{ else }} -->
+                               <!-- <tr class="table-primary second"> -->
+                               <!-- {{ end }} -->
+                            {{ else }}
+                                <tr class="table-warning second">
+                            {{ end }}
+                       {{ end }}
+                       
+                    {{ else }}  
+                    
+                        <tr class="table-light">
+                    {{ end }}
+                    <td class="pt-3-half font-weight-bold nowrap">
+                    
+                      {{if .RedTR}}
+                      <span type="text-md" class="first form-control  bg-danger text-light">{{.LotNumber}}</span>
+                    
+                      {{ else }}
+                      <span type="text-md" class="form-control">{{.LotNumber}}</span>
+                      {{ end }}
+                    
+                    
+                      <span type="text-md" class="form-control">{{.Branch}}</span>
+                    </td>
+                    <td class="pt-3-half font-weight-bold nowrap">
+                      <span type="text-md" class="form-control">{{.Priority}}</span>
+                      <span type="text-md"
+                        class="form-control">{{.NumberOfVehiclesBK}}+{{.NumberOfVehiclesSK1}}+{{.NumberOfVehiclesSK2}}={{.NumberOfVehicles}}</span>
+                    </td>
+                    
+                    
+                    
+                    
+                    
+                    </td>
+                    <td class="pt-3-half font-weight-bold">
+                      <!-- <span class="font-weight-bold">{{.Title}} </span> -->
+                      {{if .AuctionIsFinished}}
+                      {{if .WeWon}}
+                      <span class="first form-control">{{.Title}}</span>
+                      {{ else }}
+                      <span class="first form-control">{{.Title}}</span>
+                      {{ end }}
+                      {{ else }}
+                    
+                    
+                    
+                      <span class="first form-control">{{.Title}}</span>
+                      
+                    
+                    
+                      {{ end }}
+                    
+                      <span class="text-danger">
+                      
+                        <span class="font-weight-bold form-control text-danger" id="demo{{.Title}}"> </span>
+                        
+                      </span>
+                    </td>
+                    <td class="pt-3-half font-weight-bold nowrap">
+                  
+                      <span type="text-md" class="form-control">{{.InitialPrice}}</span>
+                      
+                    
+                    
+                    
+                      <span type="text-md" class="form-control ">0.5% = {{.HalfPercentOfInitialPrice}}</span>
+                    </td>
+                    <td class="pt-3-half first ">
+                    
+                    
+                        <div class="btn-group">
+                          <input class="the-chosen-one" type="checkbox" data-toggle="toggle" data-on="✓" data-off="✘" data-onstyle="primary"
+                            data-offstyle="warning" {{if .OurAuction}}checked {{ end }}> &nbsp;
+                         
+
+                          <div class="dropdown btn-group-right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    
+                            </button>
+                         
+                            <div class="dropdown-menu">
+                    
+                              <a class="dropdown-item" href="#">{{.PersonResponsibleForOur}}</a>
+                    
+                    
+                            </div>
+                          </div>
+                        </div>
+                        
+                    </td>
+                   
+                    <td class="pt-3-half nowrap"> <span type="text-md" class="form-control">{{.PlanFallLimit}}</span>
+                      <span type="text-md" class="form-control">{{.PlanFallLimitRub}}</span></td>
+                  
+                    
+                    
+                    {{if .RedTR}}
+                    <td class="pt-3-half nowrap">
+                      <div class="input-group">
+                        <input type="text" class="form-control text-center fall-limit bg-danger text-light" value="{{.FallLimit}}">
+                        <div class="dropdown">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    
+                          </button>
+                          <div class="dropdown-menu dropdown-multicol">
+                            {{range .Vers}}
+                            <div class="dropdown-row">
+                              <a class="dropdown-item" href="#">{{.FallLimit}}</a>
+                              <a class="dropdown-item" href="#">{{.Date}}</a>
+                              <a class="dropdown-item" href="#">{{.PersonResponsibleForLimit}}</a>
+                            </div>
+            
+                            {{end}}
+                    
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <input type="range" class="custom-range" value="{{.FallLimit}}" min="0" max="25" step="0.5" id="customRange1"
+                                                        oninput="changeOffer(this)"></td> -->
+                      <span type="text-md" class="form-control">{{.FallLimitRub}}</span>
+                    
+                    </td>
+                    {{ else }}
+                    <td class="pt-3-half nowrap">
+                      <div class="input-group">
+                        <input type="text" class="form-control text-center fall-limit" value="{{.FallLimit}}">
+                        
+                        <div class="dropdown">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          </button>
+                          <div class="dropdown-menu dropdown-multicol">
+                            {{range .Vers}}
+                            <div class="dropdown-row">
+                              <a class="dropdown-item" href="#">{{.FallLimit}}</a>
+                              <a class="dropdown-item" href="#">{{.Date}}</a>
+                              <a class="dropdown-item" href="#">{{.PersonResponsibleForLimit}}</a>
+                            </div>
+                            {{end}}
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <input type="range" class="custom-range" value="{{.FallLimit}}" min="0" max="25" step="0.5" id="customRange1"
+                                                            oninput="changeOffer(this)"></td> -->
+                      <span type="text-md" class="form-control">{{.FallLimitRub}}</span>
+                    </td>
+                    {{ end }}
+                    
+                    
+                    <!-- <td class="pt-3-half nowrap" contenteditable="true"> <span type="text-md" class="form-control"
+                                      >{{.AdditionalFallPercent}}</span>
+                                      <span type="text-md" class="form-control"
+                                      >{{.AdditionalFallRub}}</span></td> -->
+                    
+                    
+                    
+                    <td class="pt-3-half nowrap">
+                    
+                      <span type="text-md" class="form-control {{.OurFallIsBigger}}">{{.OurFall}}</span>
+                    
+                    
+                      <span type="text-md" class="form-control {{.FallIsBigger}}">{{.Fall}}</span>
+                    
+                    </td>
+                    <!-- <td class="pt-3-half nowrap" contenteditable="true">
+                    
+                                    
+                                  </td> -->
+                    <td class="pt-3-half nowrap">
+                    
+                      <span type="text-md" class="form-control">{{.NMCKMinusFallRub}}</span>
+                    
+                      <span type="text-md" class="form-control w-100">+0.5 = {{.NMCKMinusFallRubPlus05}}</span>
+                    
+                    </td>
+                    <td class="pt-3-half nowrap">
+                    
+                      <span type="text-md" class="form-control">{{.FallRub}}</span>
+                    
+                      <span type="text-md" class="form-control">-0.5 = {{.fallRubPlus05}}</span>
+                    
+                    </td>
+                    
+                    <td class="pt-3-half nowrap">
+                    
+                      <span type="text-md" class="form-control">{{.EconomyPercent}}</span>
+                      <span type="text-md" class="form-control">{{.EconomyRub}}</span>
+                    
+                    </td>
+                    
+                    <td class="pt-3-half font-weight-bold"  style="display: none;">
+  
+                      <span class="first form-control nowrap font-weight-bold">{{.PersonResponsibleForLimit}}</span>
+                     
+                    </td>
+                    <td class="pt-3-half font-weight-bold  nowrap w-100">
+                      
+                      <div class="btn-group">
+                        <input class="areWeInvolved" type="checkbox" data-toggle="toggle" data-on="✓" data-off="✘" data-onstyle="warning"
+                        data-offstyle="dark" {{if .AreWeInvolved}} checked {{ end }}>&nbsp;
+                        <div class="dropdown">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    
+                          </button>
+                          <div class="dropdown-menu">
+                           
+                            <a class="dropdown-item" href="#">{{.PersonResponsibleForInvolve}}</a>
+                           
+                    
+                          </div>
+                        </div>
+                        
+                      </div>               
+                                
+                    
+                    </td>
+                    <!-- <td class="pt-3-half font-weight-bold">
+                {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                        <span class="{{.PulseTR}} first">{{.PersonResponsibleForInvolve}}</span>
+                    {{ else }}
+                        <span class="{{.PulseTR}} first text-light">{{.PersonResponsibleForInvolve}}</span>
+                    {{ end }}
+                {{ else }}
+                    <span class="{{.PulseTR}} first">{{.PersonResponsibleForInvolve}}</span>
+                {{ end }}
+             
+              </td>                       -->
+              <td class="pt-3-half edit-regime" style="display: none;">
+                
+                <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up"
+                      aria-hidden="true"></i></a></span>
+                <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down"
+                      aria-hidden="true"></i></a></span>
+              </td>
+              <td class="edit-regime"style="display: none;">
+                <span class="table-remove"><button type="button"
+                    class="btn btn-danger btn-rounded btn-sm my-0">Удалить</button></span>
+              </td>
+            </tr>
+            <!-- This is our clonable table line -->
+       
+            <script>
+              
+              (function () {
+                
+              
+              unix_timestamp = {{.TimeWhenWeGetMinutesBeforeLimit}}
+              // console.log(unix_timestamp)
+              var date = new Date(unix_timestamp * 1000);
+
+              countDownDate['{{.Title}}'] = date.addMinutes(Number({{.MinutesToNextStepOverLimit}})).addSeconds(1).getTime();
+              xTimer['{{.Title}}']  = setInterval(function () {
+                // Get today's date and time
+                var now = new Date().getTime();
+                // Find the distance between now and the count down date
+                distance = countDownDate['{{.Title}}'] - now;
+            
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                minutes = checkTime(minutes)
+                seconds = checkTime(seconds)
+                // Display the result in the element with id="demo"
+                //document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                document.getElementById("demo{{.Title}}").innerHTML = minutes + ":" + seconds;
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                  // clearInterval(xTimer);
+                  // clearTimeout(timer);
+                  $('#auctionIsOver').modal('show');
+                  document.getElementById("demo{{.Title}}").innerHTML = "";
+                  // localStorage.removeItem({{.AuctionID }})
+                  // localStorage.removeItem({{.AuctionID }} + '_aferOffer')
+                }
+              }, 1000);
+            })();
+
+        </script>
+       
+            {{end}}
+
+
+
+          </tbody>
+        </table>
+      </form>
+        <!-- </div>
+          </div>
+        </div> -->
+        <!-- Editable table -->
+      </div>
+        {{end}}
+      
+      
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div id="memo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Памятка</h4>
+          <button class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body">
+          <div><span class="font-weight-bold">1) Зависание комьютера:</span> перезагрузить вкладку браузера, если не
+            получается - перезагрузить компьютер.
+          </div>
+          <div><span class="font-weight-bold">2) Отключение интернета:</span> сменить источник интернета. </div>
+          <div><span class="font-weight-bold">3) Отключение площадки:</span> взять телефон и начать снимать видео,
+            на
+            котором у Вас не работает площадка,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div><span class="font-weight-bold">4) Не подается предложение:</span> взять телефон и начать снимать
+            видео, на котором у Вас работает площадка,
+            но не подается предложение,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div class="modal-footer">
+            <div lass="btn-group btn-group-justified" role="group">
+              <div class="btn-group col-md-12" data-toggle="buttons">
+                <button class="btn btn-primary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="http://malsup.github.com/jquery.form.js"></script> 
+  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"></script> -->
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"> -->
+  <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
+
+
+
+  <!-- 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/signed-num.js"></script> -->
+
+
+
+
+
+  <!-- <script>$(document).ready(function () {
+      $('#example').DataTable({
+        columnDefs: [
+          { type: 'signed-num', targets: 0 }
+        ]
+      });
+    });
+    </script> -->
+  <!-- <script>
+    youCanGoToAuction = true
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    $('a').on('click', function (e) {
+      if (getRandomInt(1, 10) > 7 || !youCanGoToAuction) {
+        youCanGoToAuction = false
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    })
+
+  </script> -->
+  <script> $('#FIO')[0].value = localStorage.getItem('UserName')</script>
+  <script>
+
+    economyValue = {{.Economy}}
+    var economyAccumulator
+    function roundUp(num, precision) {
+      precision = Math.pow(10, precision)
+      return Math.ceil(num * precision) / precision
+    }
+    function localeString(x, sep, grp) {
+      var sx = ('' + x).split('.'), s = '', i, j;
+      sep || (sep = ' '); // default seperator
+      grp || grp === 0 || (grp = 3); // default grouping
+      i = sx[0].length;
+      while (i > grp) {
+        j = i - grp;
+        s = sep + sx[0].slice(j, i) + s;
+        i = j;
+      }
+      s = sx[0].slice(0, i) + s;
+      sx[0] = s;
+      return sx.join('.');
+    }
+    const $tableID = $('#table');
+    const $BTN = $('#export-btn');
+    const $EXPORT = $('#export');
+
+    const newTr = `
+    <tr class="hide">
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half" contenteditable="true">Example</td>
+      <td class="pt-3-half">
+        <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+        <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+      </td>
+      <td>
+        <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+      </td>
+    </tr>`;
+
+    
+
+    // $('.table-add').on('click', 'i', () => {
+    $('.tr-add').on('click', function (e) {
+      // const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+
+      // if ($tableID.find('tbody tr').length === 0) {
+
+      //   $('tbody').append(newTr);
+      // }
+
+      // $tableID.find('table').append($clone);
+      var tr = '<tr>\
+          <th scope="row">'+ 0372200004520000372 + '</th>\
+          <td>' + 2058973825.39 + '</td>\
+          <td>'+ 0 + '</td>\
+          <td>'+ 'Федоров Федор Федорович' + '</td>\
+          </tr>';
+      $('#buttonTable').append(tr);
+
+    });
+    $('.table-add').on('click', function (e) {
+      numberOfTables = $('*.card-header').length + 1
+      // var tr = '<tr>\
+      //     <th scope="row">'+ 0372200004520000372 + '</th>\
+      //     <td>' + 2058973825.39 + '</td>\
+      //     <td>'+ 0 + '</td>\
+      //     <td>'+ 'Федоров Федор Федорович' + '</td>\
+      //     </tr>';
+      var table = "\
+      <div class=\"container\">\
+        <div class=\"card\">\
+          <h3 class=\"card-header text-center font-weight-bold text-uppercase py-4\">Набор "+ numberOfTables + "\
+          </h3>\
+          <div class=\"card-body\">\
+            <div id=\"table\" class=\"table-editable\">\
+              <span class=\"tr-add float-right mb-3 mr-2\"><a href=\"#!\" class=\"text-success\"><i\
+                    class=\"fas fa-plus fa-2x\" aria-hidden=\"true\"></i></a></span>\
+              <table class=\"table table-sm table-bordered table-responsive-md table-striped text-center\" id=\"table"+ numberOfTables + "\">\
+                <thead>\
+                  <tr>\
+                    <th class=\"\text-center\" style=\"width: 12%\">Реестровый №</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Начальная цена</th>\
+                    <th class=\"text-center\" style=\"width: 20%\">Лимит снижения, %</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Лимит снижения, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Итоговое снижение, %</th>\
+                    <th class=\"text-center\" style=\"width: 18%\">Итоговое снижение, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Экономия, руб.</th>\
+                    <th class=\"text-center\" style=\"width: 12%\">Ответственный за лимит</th>\
+                    <th class=\"text-center\" style=\"width: 6%\">Порядок</th>\
+                    <th class=\"text-center\">Удалить</th>\
+                  </tr>\
+                </thead>\
+                <tbody>\
+                  <tr>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\">\
+                      <input type=\"text\" class=\"form-control\" value=\"0\">\
+                      <input type=\"range\" class=\"custom-range\" value=\"0\" min=\"0\" max=\"100\" step=\"0.5\"\
+                        id=\"customRange1\" oninput=\"changeOffer(this)\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\" contenteditable=\"true\"></td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                    </td>\
+                    <td class=\"pt-3-half\">\
+                      <span class=\"table-up\"><a href=\"#!\" class=\"indigo-text\"><i class=\"fas fa-long-arrow-alt-up\"\
+                            aria-hidden=\"true\"></i></a></span>\
+                      <span class=\"table-down\"><a href=\"#!\" class=\"indigo-text\"><i class=\"fas fa-long-arrow-alt-down\"\
+                            aria-hidden=\"true\"></i></a></span>\
+                    </td>\
+                    <td>\
+                      <span class=\"table-remove\"><button type=\"button\"\
+                          class=\"btn btn-danger btn-rounded btn-sm my-0\">Remove</button></span>\
+                    </td>\
+                  </tr>\
+                </tbody>\
+              </table>\
+            </div>\
+          </div>\
+        </div>\
+</div>\
+      ";
+
+      $('.btn.scroll-to-table').unbind()
+      tableButton = '<button class="btn btn-outline-primary scroll-to-table">' + numberOfTables + '</button>'
+      $('#buttonList')[0].innerHTML += tableButton
+      $('div.parent-of-tables').append(table);
+      $('.btn.scroll-to-table').on('click', function (e) {
+        elToSc = e
+        targetEl = elToSc.target.innerText
+        elemToScrol = $('h6:contains(' + elToSc.target.innerText.replace("  ", "").replace("\n", "") + ')')[0]
+        $(elemToScrol).get(0).scrollIntoView();
+      });
+
+    });
+    $tableID.on('click', '.table-remove', function () {
+
+      $(this).parents('tr').detach();
+    });
+
+    $tableID.on('click', '.table-up', function () {
+console.log("up")
+      const $row = $(this).parents('tr');
+
+      if ($row.index() === 1) {
+        return;
+      }
+
+      $row.prev().before($row.get(0));
+    });
+
+    $tableID.on('click', '.table-down', function () {
+      console.log("down")
+      const $row = $(this).parents('tr');
+      $row.next().after($row.get(0));
+    });
+
+    // A few jQuery helpers for exporting only
+    jQuery.fn.pop = [].pop;
+    jQuery.fn.shift = [].shift;
+
+    $BTN.on('click', () => {
+
+      const $rows = $tableID.find('tr:not(:hidden)');
+      const headers = [];
+      const data = [];
+
+      // Get the headers (add special header logic here)
+      $($rows.shift()).find('th:not(:empty)').each(function () {
+
+        headers.push($(this).text().toLowerCase());
+      });
+
+      // Turn all existing rows into a loopable array
+      $rows.each(function () {
+        const $td = $(this).find('td');
+        const h = {};
+
+        // Use the headers from earlier to name our hash keys
+        headers.forEach((header, i) => {
+
+          h[header] = $td.eq(i).text();
+        });
+
+        data.push(h);
+      });
+
+      // Output the result
+      $EXPORT.text(JSON.stringify(data));
+    });
+    var rangeEl
+    var priceFall
+    var  priceFallMinusGlobalFall
+
+    function changeOffer(that) {
+      rangeEl = that
+      $(that).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+      currentNMCK = Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText.replace(/[^0-9.]/g, ""))
+      priceFall = roundUp(currentNMCK - Number(rangeEl.value) * currentNMCK/100,2)
+      $('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText = localeString(priceFall)
+      // priceFallMinusGlobalFall = (rangeEl.value - Number($("input.custom-range")[0].value)) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+      priceFallMinusGlobalFall = (rangeEl.value) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText.replace(/[^0-9.]/g, "")) / 100
+
+      // $('#economy')[0].innerText = localeString(roundUp(economyValue - priceFallMinusGlobalFall,2))
+  
+      if  (!$('#regime-switch')[0].checked){
+        $(rangeEl).closest('tr').find('span')[8].innerText = that.value//
+        $(rangeEl).closest('tr').find('span')[9].innerText =  $('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText
+      }
+      $(rangeEl).closest('tr').find('span')[7].innerText = Number(roundUp(Number($(rangeEl).closest('tr').find('span')[9].innerText.replace(/\s/g, '')) -  Number($('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[6].children[0].innerText.replace(/\s/g, '')),2))
+      $($('tr')[3]).find('td:eq(16)').find('span')[0].innerText = $('#FIO')[0].value
+    }
+
+    function changeAllOffers(that) {
+      rangeEl = that
+      $(that).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+      customLength = $("input.custom-range").length
+      for (let i = 1; i <= customLength - 1; i++) {
+        $("input.custom-range")[i].value = that.value
+        $($("input.custom-range")[i]).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+        priceFall = $("input.custom-range")[i].value * Number($($("input.custom-range")[i]).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+        $($("input.custom-range")[i]).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText = roundUp(priceFall, 2)
+      }
+      economyValue =  {{.Economy}}
+      // $('#economy')[0].innerText = localeString(2000000000)
+      // priceFall = rangeEl.value * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+      // $(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText = priceFall
+
+      // $('#economy')[0].innerText = localeString(Number(economyValue.replace(/[^0-9.]/g, "")) - priceFall)
+    }
+    var etarget
+    $('#editRegime').on('click', function (e) {
+      $('.edit-regime').show()
+      etarget = e.target
+      e.target.style.display = "none"
+      $('svg.fa-save')[0].style.display = ""
+
+    })
+    $('#safeRegime').on('click', function (e) {
+     
+      $('.edit-regime').hide()
+      etarget = e.target
+      e.target.style.display = "none"
+      $('svg.fa-edit')[0].style.display = ""
+ 
+    })
+    $('.the-chosen-one').change(function(e) {
+      etarget = e.target
+      var our = false   
+      if ($(etarget.closest('td')).find('input')[0].checked){
+        our = true
+      }
+      // console.log(etarget.closest(':has("input.custom-range")')[0])
+      if ($(etarget.closest('tr')).find('input:checkbox')[1].checked){
+        
+      if ($(etarget.closest('td')).find('input')[0].checked){
+        etarget.closest('tr').className = "table-warning"
+      }else{
+        etarget.closest('tr').className = "table-primary"
+      }
+      }else{
+        etarget.closest('tr').className = ""
+      }
+      ChangeOurNotOur(e.target,our)
+    })
+    function ChangeOurNotOur(that, our){
+
+      AuctionID = $(that).closest('tr').find('td:eq(2)').find('span')[0].innerText
+
+      var ourAjax 
+      if (our){
+        ourAjax = '1'
+      }else{
+        ourAjax = '0'
+      }
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              User: $('#FIO')[0].value,
+              Method: 'ChangeOurNotOur',
+              AuctionID: AuctionID,
+              Our: ourAjax
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+
+
+var etarget
+    $('.areWeInvolved').change(function(e) {
+    
+    // .on('click', function (e) {
+      etarget = e.target
+      // console.log(etarget.closest(':has("input.custom-range")')[0])
+      var areWeInvolved
+      if ($(etarget.closest('td')).find('input')[0].checked){
+        areWeInvolved = true
+  
+        etarget.closest('tr').className = etarget.closest('tr').className.replace("table-dark","") 
+        if ($($(etarget.closest('tr'))[0].children[4]).find('input')[0].checked){
+          etarget.closest('tr').className = "table-primary"
+        }else{
+          etarget.closest('tr').className = "table-warning"
+        }
+      }else{
+        etarget.closest('tr').className = "table-light"
+      }
+      $(etarget.closest('tr')).find('td:eq(13)').find('span')[1].innerText = $('#FIO')[0].value
+      setActPermission(e.target,areWeInvolved)
+
+    })
+
+    function setActPermission(that, areWeInvolved){
+
+      AuctionID = $(that).closest('tr').find('td:eq(2)').find('span')[0].innerText
+
+      var areWeInvolvedAjax 
+      if (areWeInvolved){
+        areWeInvolvedAjax = '1'
+      }else{
+        areWeInvolvedAjax = '0'
+      }
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              User: $('#FIO')[0].value,
+              Method: 'setActPermission',
+              AuctionID: AuctionID,
+              AreWeInvolved: areWeInvolvedAjax
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+
+  </script>
+
+  <script>
+    var h_hght = 0; // высота шапки
+    var h_mrg = 0;    // отступ когда шапка уже не видна
+
+    var h_hghtButtons = 120; // высота шапки
+    var h_mrgButtons = 120;    // отступ когда шапка уже не видна
+
+    $(function () {
+
+      var elem = $('#top_nav');
+      var top = $(this).scrollTop();
+
+      if (top > h_hght) {
+        elem.css('top', h_mrg);
+      }
+
+      $(window).scroll(function () {
+        top = $(this).scrollTop();
+
+        // if (top + h_mrg < h_hght) {
+        //   elem.css('top', (h_hght - top));
+        // } else {
+        elem.css('top', h_mrg);
+        // }
+      });
+
+    });
+    $(function () {
+
+      var elem = $('#top_buttons');
+      var top = $(this).scrollTop();
+
+      if (top > h_hghtButtons) {
+        elem.css('top', h_mrgButtons);
+      }
+
+      $(window).scroll(function () {
+        top = $(this).scrollTop();
+
+        if (top + h_mrgButtons < h_hghtButtons) {
+          elem.css('top', (h_hghtButtons - top));
+        } else {
+          elem.css('top', h_mrgButtons);
+        }
+      });
+
+    });
+
+
+    $(function () {
+      // var  elemswith
+      $('#regime-switch').change(function (e) {
+
+        if (e.target.checked) {
+          $('.edit-regime').hide()
+          var TableData = ""
+          var numberOfTable = 0
+          $('table.table-auctions tr').each(function(row, tr){
+            if ($(tr).find('th').length == 0){
+              TableData = TableData 
+              
+                  + $(tr).find('td:eq(2)').find('span')[0].innerText + '&'  // Реестровый №
+                  + $(tr).find('td:eq(3)').find('span')[0].innerText + '&'  // НМЦК
+                  + $(tr).find('td:eq(4)').find('input')[0].checked + '&'  // Наш
+                  + $(tr).find('td:eq(6)').find('input.form-control')[0].value + '&'  // Лимит снижения, %
+                  + $(tr).find('td:eq(5)').find('span')[0].innerText + '&' // Плановый лимит, %
+                  + $(tr).find('td:eq(11)').find('span')[0].innerText + '&' //ФИО
+                  + '\n';
+              }else{
+                  numberOfTable += 1
+                  TableData = TableData + numberOfTable + '\n' //Номер таблицы
+              }
+              console.log(TableData)
+          });
+          $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              user: $('#FIO')[0].value,
+              Method: 'SavePreSettings',
+              TableData : TableData 
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+        } else {
+          $('.edit-regime').show()
+
+        }
+
+        // $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+      })
+    })
+  </script>
+  <script>
+
+    var elToSc
+
+    $('.btn.scroll-to-table').on('click', function (e) {
+      elToSc = e
+      targetEl = elToSc.target.innerText
+      elemToScrol = $('h6:contains(' + elToSc.target.innerText.replace("  ", "").replace("\n", "") + ')')[0]
+      $(elemToScrol).get(0).scrollIntoView();
+    });
+
+//     $(document).on('keypress',function(e) {
+//     if(e.which == 13) {
+//         alert('You pressed enter!');
+//     }
+// });
+
+
+
+
+
+    $('#FIO').on('keyup', function (e) {
+      localStorage.setItem('UserName', e.target.value);
+    })
+
+    function saveFallLimit(e){
+      var prevValue = e.target.value;//$(this)[0].value;
+      setTimeout(function () {
+        var price = e.target
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\.\d{0,2})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+          }
+        }
+        saveOurFallLimit(e.target)
+        return true;
+      }, 1);
+    }
+
+    var countDownFallLimit 
+// var fallLimitOnItsWay = false
+    $('.fall-limit').on('keyup', function (e) {
+      
+      if (e.keyCode == 13) {
+        saveFallLimit(e)
+      }
+
+
+              // var date = new Date();
+
+              // countDownFallLimit = date.addMinutes(0).addSeconds(1).getTime();
+              // if (!fallLimitOnItsWay){
+              //   fallLimitOnItsWay = true
+              //   xTimerFallLimitFunc(e)
+              // }
+
+}) 
+  function xTimerFallLimitFunc(e) {
+    var xTimerFallLimit = setInterval(function () {
+      // Get today's date and time
+      var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      distance = countDownFallLimit - now;
+      if (distance < 0) {
+        clearInterval(xTimerFallLimit);
+        saveFallLimit(e)
+      }
+    }, 1000);
+  }
+      // saveFallLimit(e)
+    // })
+
+
+
+    function pageUpdate(data){
+  data1 = data
+              // console.log(data)
+              // fallLimitOnsItsWay = false
+              // $('tr').find('td:eq(3)').find('span')[1].innerText
+
+              parsedData = JSON.parse(data) 
+              tables = parsedData.Data
+              if (tables == undefined) return
+              $('#Economy')[0].innerText = parsedData.Economy
+              $('#AwerageFallEconomy')[0].innerText = parsedData.AwerageFallEconomy
+
+              $('#SumOfOurInitialPrices')[0].innerText = parsedData.SumOfOurInitialPrices
+              $('#SumOfNotOurInitialPrices')[0].innerText= parsedData.SumOfNotOurInitialPrices
+
+              $('#SumOurFallRub')[0].innerText= parsedData.SumOurFallRub
+              $('#SumNotOurFallRub')[0].innerText= parsedData.SumNotOurFallRub
+
+              $('#SumOurFallPercent')[0].innerText= parsedData.SumOurFallPercent
+              $('#SumNotOurFallPercent')[0].innerText= parsedData.SumNotOurFallPercent
+
+              $('#SumOurPlanFallLimit')[0].innerText= parsedData.SumOurPlanFallLimit
+              $('#SumNotOurPlanFallLimit')[0].innerText= parsedData.SumNotOurPlanFallLimit
+
+              $('#SumOurAdditionalFall')[0].innerText= parsedData.SumOurAdditionalFall
+              $('#SumNotOurAdditionalFall')[0].innerText= parsedData.SumNotOurAdditionalFall
+
+              $('#SumOurPlanFallLimitPercent')[0].innerText= parsedData.SumOurPlanFallLimitPercent
+              $('#SumNotOurPlanFallLimitPercent')[0].innerText= parsedData.SumNotOurPlanFallLimitPercent
+
+              $('#OurAverageStartLimit')[0].innerText= parsedData.OurAverageStartLimit
+              $('#NotOurAverageStartLimit')[0].innerText= parsedData.NotOurAverageStartLimit
+
+              $('#OurAverageFall')[0].innerText= parsedData.OurAverageFall
+              $('#NotOurAverageFall')[0].innerText= parsedData.NotOurAverageFall
+
+              $('#OurDifAverageFall')[0].innerText= parsedData.OurDifAverageFall
+              $('#NotOurDifAverageFall')[0].innerText= parsedData.NotOurDifAverageFall
+
+              $('#OurVehiclesGor')[0].innerText= parsedData.OurVehiclesGor
+              $('#NotOurVehiclesGor')[0].innerText= parsedData.NotOurVehiclesGor
+
+              $('#OurVehiclesVIT')[0].innerText= parsedData.OurVehiclesVIT
+              $('#NotOurVehiclesVIT')[0].innerText= parsedData.NotOurVehiclesVIT
+
+              $('#OurVehiclesZEL')[0].innerText= parsedData.OurVehiclesZEL
+              $('#NotOurVehiclesZEL')[0].innerText= parsedData.NotOurVehiclesZEL
+
+              $('#OurVehiclesALL')[0].innerText= parsedData.OurVehiclesALL
+              $('#NotOurVehiclesALL')[0].innerText= parsedData.NotOurVehiclesALL
+
+              
+
+              
+              for (var i = 0; i < tables.length; i++) {
+                for (var j = 0; j < tables[i].Table.length; j++) {
+                  //console.log(tables[i].Table[j].Fall,tables[i].Table[j].OurFall)
+                  tI = i + 1
+                  //console.log( $('#table'+tI).find('tr').find('td:eq(7)').find('span')[0])
+                  // var $dropdownList = $("#second-choice");
+                  // $secondChoice.empty();
+                  // $.each(vals, function (index, value) {
+                  //   $secondChoice.append("<option>" + value + "</option>");
+                  // });
+                  // tables[i].Table[j].Vers
+                  tableVersLength = tables[i].Table[j].Vers.length
+                  tableDropdownLength = $($('#table' + tI).find('tr')[j + 1]).find('td:eq(6)').find('.dropdown-menu')[0].children.length
+                  // console.log(tableVersLength, tableDropdownLength)
+                  if (tableVersLength != tableDropdownLength) {
+                    howManyItemsToAdd = tableVersLength - tableDropdownLength
+                    for (var k = howManyItemsToAdd-1; k >= 0; k--) {
+                      // console.log(k)
+                      $($($('#table' + tI).find('tr')[j + 1]).find('td:eq(6)').find('.dropdown-menu')[0]).prepend(' <a class="dropdown-item" href="#">' +
+                        tables[i].Table[j].Vers[k].FallLimit +
+                        '|' + tables[i].Table[j].Vers[k].Date + '|' + tables[i].Table[j].Vers[k].PersonResponsibleForLimit + '</a>');
+                    }
+                  }
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(7)').find('span')[0].innerText = tables[i].Table[j].OurFall
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(7)').find('span')[1].innerText = tables[i].Table[j].Fall
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(8)').find('span')[0].innerText = tables[i].Table[j].NMCKMinusFallRub
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(8)').find('span')[1].innerText = '+0.5 = '+tables[i].Table[j].NMCKMinusFallRubPlus05
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(9)').find('span')[0].innerText = tables[i].Table[j].FallRub
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(9)').find('span')[1].innerText = '-0.5 = '+tables[i].Table[j].fallRubPlus05
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(10)').find('span')[0].innerText = tables[i].Table[j].EconomyPercent
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(10)').find('span')[1].innerText = tables[i].Table[j].EconomyRub
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(11)').find('span')[0].innerText = tables[i].Table[j].PersonResponsibleForLimit
+
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(12)').find('a')[0].innerText = tables[i].Table[j].PersonResponsibleForInvolve
+
+                  $($('#table' + tI).find('tr')[j + 1]).find('td:eq(4)').find('a')[0].innerText = tables[i].Table[j].PersonResponsibleForOur
+
+                  // if  ($($('#table' + tI).find('tr')[j + 1]).find('td:eq(12)').find('input')[0].checked){
+                  toggleButtonAreWeInvolved = $($($('#table' + tI).find('tr')[j + 1]).find('td:eq(12)')[0].children[0].children[0])
+                  if (tables[i].Table[j].AreWeInvolved) {
+
+                    if (toggleButtonAreWeInvolved.hasClass("off")) {
+                      toggleButtonAreWeInvolved.bootstrapToggle({
+                        on: '✓',
+                        off: '✘',
+                        onstyle: 'warning',
+                        offstyle: 'dark'
+                      }).bootstrapToggle('on')
+                    }
+                  } else {
+                    if (!toggleButtonAreWeInvolved.hasClass("off")) {
+                      toggleButtonAreWeInvolved.bootstrapToggle({
+                        on: '✓',
+                        off: '✘',
+                        onstyle: 'warning',
+                        offstyle: 'dark'
+                      }).bootstrapToggle('off')
+                    }
+                  }
+
+
+                  toggleButtonOur = $($($('#table' + tI).find('tr')[j + 1]).find('td:eq(4)')[0].children[0].children[0])
+                  if (tables[i].Table[j].OurAuction) {
+
+                    if (toggleButtonOur.hasClass("off")) {
+                      toggleButtonOur.bootstrapToggle({
+                        on: '✓',
+                        off: '✘',
+                        onstyle: 'primary',
+                        offstyle: 'warning'
+                      }).bootstrapToggle('on')
+                    }
+                  } else {
+                    if (!toggleButtonOur.hasClass("off")) {
+                      toggleButtonOur.bootstrapToggle({
+                        on: '✓',
+                        off: '✘',
+                        onstyle: 'primary',
+                        offstyle: 'warning'
+                      }).bootstrapToggle('off')
+                    }
+                  }
+
+                  let unix_timestamp = tables[i].Table[j].TimeWhenWeGetMinutesBeforeLimit
+                  let date = new Date(unix_timestamp * 1000);
+                  // console.log($($('#table' + tI).find('tr')[j + 1]).find('td:eq(2)').find('span')[0].innerText)
+                  countDownDate[$($('#table' + tI).find('tr')[j + 1]).find('td:eq(2)').find('span')[0].innerText] = date.addMinutes(Number(tables[i].Table[j].MinutesToNextStepOverLimit)).addSeconds(1).getTime();
+
+
+                }
+              }
+              // $(that1).closest('tr').find('td:eq(7)').find('span')[0]
+              // $(that1).closest('tr').find('td:eq(7)').find('span')[1]
+
+}
+setInterval(function(){$.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'pageUpdate'
+
+            },
+            success: function (data) {
+              pageUpdate(data)
+            },
+          });}
+          
+          , 1000);
+
+ var data1
+    function saveOurFallLimit(that) {
+      // that1 = that
+      // $('tr').find('td:eq(3)').find('span')[1].innerText
+      // currentNMCK = Number( $(that).closest('tr').find('td:eq(3)').find('span')[0].innerText.replace(/[^0-9.]/g, ""))
+      // priceFall = roundUp(currentNMCK - Number(that.value) * currentNMCK/100,2)
+      // $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText = localeString(priceFall)
+      // $(that).closest('tr').find('td:eq(11)').find('span')[0].innerText = $('#FIO')[0].value
+ 
+
+     
+      // rrrr = priceFall
+      // $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText =  that.value
+      AuctionID = $(that).closest('tr').find('td:eq(2)').find('span')[0].innerText
+
+      if  (!$('#regime-switch')[0].checked){
+        $(that).closest('tr').find('td:eq(5)').find('span')[0].innerText = that.value
+        $(that).closest('tr').find('td:eq(5)').find('span')[1].innerText = $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText
+      }
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              User: $('#FIO')[0].value,
+              Method: 'ChangeFallLimit',
+              AuctionID: AuctionID,
+		          FallLimit: that.value
+
+            },
+            success: function (data) {
+              currentNMCK = Number( $(that).closest('tr').find('td:eq(3)').find('span')[0].innerText.replace(/[^0-9.]/g, ""))
+              priceFall = roundUp(currentNMCK - Number(that.value) * currentNMCK/100,2)
+              $(that).closest('tr').find('td:eq(6)').find('span')[0].innerText = localeString(priceFall)
+              $(that).closest('tr').find('td:eq(11)').find('span')[0].innerText = $('#FIO')[0].value
+
+
+
+
+              pageUpdate(data)
+            },
+          });
+    }
+
+  </script>
+
+</body>
+
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Developer: Ermeshev Marat, ErmMarat@gmail.com</a>
+  <a href="https://trade.3park.online/http_handler/ListOfTasks/"
+    class="nav-link">
+    <button class="btn btn-outline-success my-2 my-sm-0">Tasks</button>
+  </a>
+
+  <!-- <a href="https://docs.google.com/spreadsheets/d/1X3pOkI0VvRu07ULpOJUFIZ_NchbZQkgV7UhRoJjDZC4/edit#gid=1249905151"
+    class="nav-link">
+    <button class="btn btn-outline-success my-2 my-sm-0">Google Таблицы</button>
+  </a> -->
+
+</nav>
+
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Тренажер для закупок</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            /* background-image: url("/static/img/noInternet.png"); background-repeat: no-repeat */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center">
+        <img src="/static/img/noAccess.png" class="img-fluid">
+    </div>
+    <script>
+        function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            location.search
+                .substr(1)
+                .split("&")
+                .forEach(function (item) {
+                    tmp = item.split("=");
+                    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+                });
+            return result;
+        }
+        AuctionID = findGetParameter('AuctionID')
+        localStorage.setItem("AccessDenied" + AuctionID, "true");
+
+
+    </script>
+</body>
+
+</html>

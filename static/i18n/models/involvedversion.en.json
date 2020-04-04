@@ -1,0 +1,47 @@
+{
+  "display_name": "Involved Version",
+  "fields": {
+    "AreWeInvolved": {
+      "display_name": "Are We Involved",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Auction": {
+      "display_name": "Auction",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Date": {
+      "display_name": "Date",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Number": {
+      "display_name": "Number",
+      "help": "version number",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForInvolve": {
+      "display_name": "Person Responsible For Involve",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

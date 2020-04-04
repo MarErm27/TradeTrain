@@ -1,0 +1,33 @@
+{
+  "display_name": "All Auctions Data And Settings",
+  "fields": {
+    "AuctionsPerParticipant": {
+      "display_name": "Auctions Per Participant",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfParticipants": {
+      "display_name": "Number Of Participants",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

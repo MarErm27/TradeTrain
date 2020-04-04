@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Тренажер для закупок</title>
+    <link rel="shortcut icon" href="/static/uadmin/favicon.ico" />
+
+    <link rel="stylesheet" href="/static/uadmin/assets/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/uadmin/assets/fa/css/all.min.css">
+
+    <link rel="stylesheet" href="/static/uadmin/assets/bootstrap/3.3.7/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/static/uadmin/assets/datepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/static/uadmin/assets/admin/main.css">
+    <link rel="stylesheet" href="/static/uadmin/assets/css/hover.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+        /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+        p.lead {
+            padding-left: 15px;
+
+        }
+
+        div.container {
+            max-width: 100%;
+            padding-bottom: 80px;
+        }
+
+        .pt-3-half {
+            padding-top: 1.4rem;
+        }
+
+        /* .container{
+    max-width: 100%;
+} */ -->
+    </style>
+</head>
+
+<body>
+    
+    <div class="container justify-content-md-center" style="margin-top: 65px;">
+
+        <center>
+            <h1 class="admin_font bold">Выберите набор реестровых номеров</h1>
+        </center>
+        <div class="col-sm-12" id="panel-container">
+            {{range .}}
+            <div class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="/http_handler/Task?NumberOfCollection={{.NumberOfCollection}}">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br>   
+                          
+                            {{range .SliceOfNumber}}          
+                            <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                           src="/static/img/{{.}}.png">                      
+                           {{ end }}
+                    </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Перейти к набору</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+            {{ end }}
+        </div>
+
+    </div>
+
+        <!-- <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                            src="/static/img/0.png">  -->
+
+
+    <!-- <div class="col-sm-12" id="panel-container">
+ 
+        <div id="model-dashboard-menus" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="dashboardmenu">
+        
+                <center>
+                    
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/dashboard menus.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Dashboard Menus</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-users" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="user">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/users.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Users</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-user-groups" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="usergroup">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/user groups.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">User Groups</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-languages" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="language">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/languages.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Languages</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-logs" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="log">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/logs.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Logs</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-settings" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="setting">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/settings.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Settings</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-setting-categories" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style"
+                href="settingcategory">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/setting categories.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Setting Categories</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-approvals" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="approval">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/approvals.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Approvals</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-ab-tests" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="abtest">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon roboto-regular">System</div>
+                        </div>
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/ab tests.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">AB Tests</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-auctions" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="auction">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Auctions</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-offers" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="offer">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Offers</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-participants" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="participant">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Participants</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-all-auctions data and settings" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style"
+                href="allauctionsdataandsetting">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">All Auctions Data And Settings</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-all-auctions data and settings" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style"
+                href="allauctionsdataandsettings">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">All Auctions Data And Settings</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+        <div id="model-auction-versions" class="col-xs-12 col-sm-6 col-md-4"> <a class="no-style" href="auctionversion">
+                <center>
+                    <div class="pop_itemHV defaultmargin container-fluid hvr-grow col-md-12" style="width:100%;">
+                        <center><br> <img onerror="this.src='/static/uadmin/assets/admin/images/icons/model.png';"
+                                src="/static/uadmin/assets/admin/images/icons/model.png"> </center>
+                        <h5 class="bold  capitalized admin_font">
+                            <center> <span class="camelcaseFix">Auction Versions</span> </center>
+                        </h5> <br>
+                    </div>
+                </center>
+            </a></div>
+     
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/static/uadmin/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/uadmin/js/notify.min.js"></script>
+    <script src="/static/uadmin/assets/js/tether.min.js"></script>
+    <script src="/static/uadmin/assets/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/uadmin/assets/moment.js"></script>
+    <script src="/static/uadmin/assets/datepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/static/uadmin/assets/admin/main.js"></script>
+    <script src="/static/uadmin/assets/js/wow.js"></script>
+    <script src="/static/uadmin/assets/js/staticdata.js"></script>
+    <script>
+        $('#CleanBD').on('click', function (e) {
+            $.ajax({
+                //url: window.location.href,
+                method: "POST",
+                data: {
+
+                    Method: 'CleanDB'
+                },
+
+                success: function (data) {
+                    console.log("CleanBD")
+                },
+            });
+
+        })
+        $('#setAllAuctionStartTime').on('click', function (e) {
+            timeToSet = $('#datetimepicker2').find('input')[0].value
+            if (timeToSet != "") {
+
+                dateString = timeToSet.substr(3, 2) + "." + timeToSet.substr(0, 2) + "." + timeToSet.substr(6, 4) + timeToSet.substr(10)
+                formatedTimeToSet = new Date(dateString)
+                unixTimeToSet = formatedTimeToSet.getTime() / 1000
+                $.ajax({
+                    //url: window.location.href,
+                    method: "POST",
+                    data: {
+                        Method: 'setAllAuctionStartTime',
+                        UnixTimeToSet: unixTimeToSet
+                    },
+
+                    success: function (data) {
+                        console.log("setAllAuctionStartTime")
+                    },
+                });
+            }
+        })
+    </script>
+
+
+
+
+
+
+
+    <div class="z-index9 fixed-bottom bg-black3 default-padding">
+        <div class="">
+            <div class="pull-right" style="display: block-inline;">
+                <div class="float-right">Icons made by <a href="https://www.flaticon.com/authors/vectors-market"
+                        title="Vectors Market">Icons made by Vectors Market</a> <a href="https://www.flaticon.com/"
+                        title="Flaticon"> from
+                        www.flaticon.com</a></div>
+            </div>
+            <div class="pull-left" style="display: block-inline;">
+
+                <button class="btn btn-primary">Разработчик: Ермешев Марат, АО "Третий парк",
+                    ErmMarat@gmail.com</button>
+
+            </div>
+        </div>
+    </div>
+
+</html>

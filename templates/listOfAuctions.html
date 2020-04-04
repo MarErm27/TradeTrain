@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Bid simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+    /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+    p.lead {
+      padding-left: 15px;
+
+    }
+    div.container{
+      max-width: 100%;
+      padding-bottom: 80px;
+    }
+
+    /* .container{
+    max-width: 100%;
+} */
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="container-fluid">
+    <br>
+
+
+    <!-- Панель навигации -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-top">
+
+      <a href="#" class="navbar-brand">Тренажер для закупок</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Аукционы<span class="sr-only">(current)</span></a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Контакты<span class="sr-only">(current)</span></a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Не забыть!<span class="sr-only">(current)</span></a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Мои заявки<span class="sr-only">(current)</span></a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Пользователи</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Уведомления</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Обжалования</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Документы</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Статистика</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Кредиты</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Банковские гарантии</a>
+
+          </li>
+          <li class="nav-item dropdown">
+
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Помощь</a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#memo" data-dismiss="modal">Памятка</a>
+              
+              <!-- <a href="#" class="dropdown-item" data-toggle="modal" data-target="#tips"
+                data-dismiss="modal">Подсказки</a> -->
+
+              <!-- <a href="#" class="dropdown-item">Action</a>
+
+              <a href="#" class="dropdown-item">Another action</a> -->
+              <!-- <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">Роли (в разработке)</h6>
+              <a class="dropdown-item">Группа-1</a>
+              <a class="dropdown-item">Группа-2</a>
+              <a class="dropdown-item">Группа-3</a>
+              <h6 class="dropdown-header">Сценарии (в разработке)</h6>
+              <a class="dropdown-item">Отключение электричества</a>
+              <a class="dropdown-item">Отключение проводного интернета</a>
+              <a class="dropdown-item">Отключение мобильного интернета</a>
+              <div class="dropdown-divider"></div> -->
+
+              <a id="aboutProgramm" href="#" class="dropdown-item" data-toggle="modal" data-target="#aboutProgrammInfo"
+                data-dismiss="modal">О программе</a>
+
+            </div>
+
+          </li>
+          <!-- 
+          <li class="nav-item">
+
+            <a href="#" class="nav-link disabled">Disabled</a>
+
+          </li> -->
+
+        </ul>
+
+ 
+
+          <!-- <input type="search" class="form-control mr-sm-2" placeholder="" aria-label="search"> -->
+
+          <button class="btn btn-outline-success my-2 my-sm-0">Главная</button>
+          <button class="btn btn-outline-success my-2 my-sm-0">Выход</button>
+
+
+
+      </div>
+
+    </nav>
+
+
+
+    <!-- Конец панели навигации -->
+    <p class="lead bg-light">Электронные аукционы</p>
+  </div>
+  <!-- Джумботрон -->
+
+
+
+
+
+
+  <!-- Конец джумботрона -->
+
+  <div class="container">
+
+    <button class="btn btn-primary float-right">Расширенный поиск</button>
+    <table id="example" class="table table-bordered table-hover" style="width:100%">
+      <thead class="thead-light">
+        <tr>
+          <th>Реестровый №</th>
+          <th style="width: 16%">Наименование</th>
+          <th>Организатор</th>
+          <th>Нач. цена</th>
+          <th>Публикация извещения</th>
+          <th>Окончание подачи заявок</th>
+          <th>Начало торгов</th>
+          <th>Статус</th>
+          <th style="width: 10%"> Операции</th>
+        </tr>
+      </thead>
+      <tbody>
+     
+        {{range .}}
+ 
+      {{if .StatusBool}}
+      <tr class="table-warning">
+      {{ else }}
+      <tr class="table-danger">
+      {{ end }}
+        
+          <td><span class="font-weight-bold">{{.Title}}</span></td>
+          <td>Выполнение работ связанных с осуществлением регулярных перевозок пассажиров и багажа автомобильным
+            транспортом по регулируемым тарифам.</td>
+          <td>СБП ГКУ "Организатор перевозок"</td>
+          <td><span class="text-nowrap">{{.InitialPrice}}</span></td>
+          <td>20.01.2020</td>
+          <td>20.02.2020 11:00 </td>
+          <td>25.01.2020 10:00</td>
+          <td>{{.Status}}</td>
+          <td>
+
+            <div class="btn-group-vertical btn-group-md" data-toggle="buttons">
+              <button class="btn btn-link">Извещение</button><br>
+              {{if .StatusBool}}
+   
+                {{ else }} 
+                <a href="/http_handler/Auction?AuctionID={{.Title}}"
+                class="btn btn-link"><span class="text-danger font-weight-bold">Торги</span></a><br>
+                {{ end }}
+              <button class="btn btn-link">Протоколы</button><br>
+              <button class="btn btn-link">События</button><br>
+              <button class="btn btn-link">Заявка на получение<br>банковской гарантии</button>
+            </div>
+
+          </td>
+        </tr>
+
+        {{end}}
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Реестровый №</th>
+          <th>Наименование</th>
+          <th>Организатор</th>
+          <th>Нач. цена</th>
+          <th>Публикация извещения</th>
+          <th>Окончание подачи заявок</th>
+          <th>Начало торгов</th>
+          <th>Статус</th>
+          <th> Операции</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div id="memo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Памятка</h4>
+          <button class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body">
+          <div><span class="font-weight-bold">1) Зависание комьютера:</span> перезагрузить вкладку браузера, если не
+            получается - перезагрузить компьютер.
+          </div>
+          <div><span class="font-weight-bold">2) Отключение интернета:</span> сменить источник интернета. </div>
+          <div><span class="font-weight-bold">3) Отключение площадки:</span> взять телефон и начать снимать видео,
+            на
+            котором у Вас не работает площадка,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div><span class="font-weight-bold">4) Не подается предложение:</span> взять телефон и начать снимать
+            видео, на котором у Вас работает площадка,
+            но не подается предложение,
+            затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+            после чего авторизуетесь на площадке
+            <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+            что компьютер настроен правильно.</div>
+          <div class="modal-footer">
+            <div lass="btn-group btn-group-justified" role="group">
+              <div class="btn-group col-md-12" data-toggle="buttons">
+                <button class="btn btn-primary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"></script> -->
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"> -->
+  <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/signed-num.js"></script>
+
+
+  <script>$(document).ready(function () {
+      $('#example').DataTable({
+        columnDefs: [
+          { type: 'signed-num', targets: 0 }
+        ]
+      });
+    });</script>
+  <script>
+    youCanGoToAuction = true
+      function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    $('a').on('click', function (e) {
+      if (getRandomInt(1, 1000) ==7 || !youCanGoToAuction){
+        youCanGoToAuction = false
+      e.stopPropagation();
+      e.preventDefault();
+      }
+    })
+
+  </script>
+</body>
+
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Разработчик: Ермешев Марат, АО "Третий парк", ErmMarat@gmail.com</a>
+</nav>
+
+</html>

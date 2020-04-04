@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  {{range .Data}}
+  <title>Set {{.TableNumber}}</title>
+  {{end}}
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <script src="https://use.fontawesome.com/99a9553d81.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/brands.min.js"
+    integrity="sha384-KASsDRWwlErb8dTf+e5TxRXMnbXrVlbPbn1hS5B/yS4vNsF7mHHO+Gw1bBDhcyOt"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/conflict-detection.min.js"
+    integrity="sha384-fHnSzPZE3xYvvXY0y51vln9J+Jd0eK4HughCkcA0NsBpmAGgU97n65RbDqUgnWf1"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"
+    integrity="sha384-H4naMsxnUrIT8qihjWfwIKXi5biIYnqUsQ+vIJGZIKfA+7/O3FxgvMrdH77X+aID"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/regular.min.js"
+    integrity="sha384-yUk5aOIIy62R2bRFbFq0+bo+ChWYs75cusETAJ1KYvEMRiEbQZmNU6u+PK60t536"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/solid.min.js"
+    integrity="sha384-OSCcNUu98kEBVxq0vZaBr0wdmmd2ojuJwvWuSRKD0V10PWmvTetja8mxGfZm5PsV"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+    integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+        function checkTime(i) {
+          if (i < 10) {
+            i = "0" + i;
+          }
+          return i;
+        }
+         Date.prototype.addMinutes = function (minutes) {
+            this.setMinutes(this.getMinutes() + minutes);
+            return this;
+          };
+          Date.prototype.addSeconds = function (seconds) {
+            this.setSeconds(this.getSeconds() + seconds);
+            return this;
+          };
+    </script>
+  <style>
+    /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+    /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+    p.lead {
+      padding-left: 15px;
+    }
+
+    div.container {
+      max-width: 100%;
+      padding-bottom: 80px;
+    }
+
+    .pt-3-half {
+      padding-top: 1.4rem;
+    }
+    .custom-range::-webkit-slider-thumb {
+      background: yellow;
+    }
+    .custom-range::-webkit-slider-thumb:active{
+      background-color:yellow;
+    }
+    .custom-range::-webkit-slider-thumb{
+      box-shadow:yellow;
+    }
+    #customRange1{
+      width: 200;
+    }
+    .table td.nowrap {
+      white-space: nowrap;
+    }
+    /* #minutesBeforeEndOfATurn{
+      width: 30px;
+    } */
+    /* .container{
+    max-width: 100%;
+} */
+    .pulse {
+      overflow: visible;
+      position: relative;
+    }
+    .pulse:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgb(255, 255, 255);
+      border-radius: inherit;
+      transition: opacity .3s, transform .3s;
+      animation: pulse-animation 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      z-index: 1;
+    }
+    @keyframes pulse-animation {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+    .first{
+     z-index: 1;
+
+ }
+    .second{
+    z-index: -1;
+}
+  </style>
+</head>
+
+<body>
+
+    {{range .Data}}
+    <!-- Editable table -->
+    <!-- <div class="card"> -->
+      <h3 class="card-header text-center font-weight-bold text-uppercase py-2">Набор {{.TableNumber}}</h3>
+      <!-- <div class="card-body"> -->
+        <!-- <div id="table" class="table-editable"> -->
+          <!-- <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
+                aria-hidden="true"></i></a></span> -->
+          <table class="table table-bordered table-responsive-md table-striped text-center">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 1%">Лот</th>
+                <th class="text-center" style="width: 12%">Реестровый №</th>
+                <th class="text-center" style="width: 12%">Начальная цена</th>
+                <th class="text-center" style="width: 1%">Лимит снижения</th>
+                <th class="text-center" style="width: 12%">Ответственный за лимит</th>
+                <th class="text-center" style="width: 12%">Текущее наше снижение, %</th>
+                <th class="text-center" style="width: 12%">Текущее снижение, %</th>
+                <th class="text-center " style="width: 8%">Сообщить о достижении лимита</th>
+                <th class="text-center text-success" style="width: 8%">Сообщить о победе</th>         
+                <th class="text-center text-dark" style="width: 8%">Сообщить о поражении</th>
+                <th class="text-center text-dark" style="width: 8%">Сообщить об ошибках (в разработке)</th>
+              </tr>
+            </thead>
+            <tbody>
+          
+              {{range .Table}}
+
+              {{if .AreWeInvolved}}
+              {{if .AuctionIsFinished}}
+                  {{if .WeWon}}
+                      <tr class="table-success second">
+                  {{ else }}
+                       <tr class="bg-dark second">
+                  {{ end }}
+              {{ else }}
+
+                  {{if .OurAuction}}
+                      <!-- {{if .RedTR}} -->
+                      <!-- <tr class="table-danger second">
+                      {{ else }}
+                      <tr class="table-primary second">
+                      {{ end }} -->
+                      <tr class="table-primary second">
+                  {{ else }}
+                  <tr class="table-warning second">
+                  {{ end }}
+
+              {{ end }}
+              {{ else }}  
+              <tr class="table-light">
+                {{ end }}
+              <!-- <tr > -->
+                
+                 
+                {{if .RedTR}}
+                <td class="pt-3-half font-weight-bold nowrap  bg-danger text-light">
+                  <span type="text-md" class="form-control"
+                    >{{.LotNumber}}</span>               
+                </td>
+                {{ else }} 
+                <td class="pt-3-half font-weight-bold nowrap">
+                  <span type="text-md" class="form-control"
+                    >{{.LotNumber}}</span>               
+                </td>
+                 {{ end }}
+
+
+   
+               
+       
+                <td class="pt-3-half font-weight-bold" >
+                  {{if .AuctionIsFinished}}
+                     {{if .WeWon}}
+                      <span class="first">{{.Title}}</span>
+                      {{ else }}
+                      <span class="first text-light">{{.Title}}</span>
+                      {{ end }}
+                  {{ else }}
+                      <span class="first">{{.Title}}</span>
+                  {{ end }}
+                  <br> 
+                <span class="text-danger font-weight-bold first"> 
+                  {{if .ShowTimer}}
+                  <a href="#!" class="text-primary">
+                    <i class="fas fa-1x" aria-hidden="true" id="tableAdder"></i>
+                  </a>
+                  {{ else }}
+                  <span class="font-weight-bold" id="demo{{.Title}}"> </span>
+                  {{ end }}
+                
+                  
+                </snan>
+              </td>
+                <td class="pt-3-half nowrap font-weight-bold"><span type="text-md" class="form-control"
+                  >{{.InitialPrice}}</span>
+
+                </td>
+                <td class="pt-3-half font-weight-bold second ">
+                  <span type="text-md" class="form-control first able-to-pulse"
+                  >{{.FallLimit}}</span>
+
+                </td>
+                <td class="pt-3-half font-weight-bold">
+                  
+
+                {{if .AuctionIsFinished}}
+                    {{if .WeWon}}
+                        <span class="first">{{.PersonResponsibleForLimit}}</span>
+                    {{ else }}
+                        <span class="first text-light">{{.PersonResponsibleForLimit}}</span>
+                    {{ end }}
+                {{ else }}
+                    <span class="first">{{.PersonResponsibleForLimit}}</span>
+                {{ end }}
+
+              </td>
+                <td class="pt-3-half">                    <input type="text" class="form-control first percentOurFall" value="{{.OurFall}}">
+                  <!-- <input type="range" class="custom-range" value="{{.OurFall}}" min="0" max="25" step="0.1" id="customRange1"
+                    oninput="changeOffer(this)" onchange="saveOurOffer(this)"></td></td> -->
+                <td class="pt-3-half">                    <input type="text" class="form-control first percentFall" value="{{.Fall}}">
+                  <!-- <input type="range" class="custom-range " value="{{.Fall}}" min="0" max="25" step="0.1" id="customRange1"
+                    oninput="changeOffer(this)" onchange="saveOffer(this)"></td></td> -->
+                <td class="pt-3-half">
+                  <div class="input-group  mb-3">&nbsp;
+                    <input type="text" class="form-control w-25 minutesToNextStepOverLimit">
+     
+                    <button class="btn btn-warning timeToNextStepOverTheLimit first">минут</button><br>
+              
+                  </div>
+                </td>
+                <td class="pt-3-half">
+                  <div class="input-group  mb-3">
+                   {{if .AuctionIsFinished}}
+
+                      {{if .WeWon}}
+                      <button class="btn btn-success makeSureThatWeWon weWonThisOne" data-toggle="modal"
+                      data-target="#tellThatWeWon"> Отменить
+                    </button>
+                      
+                      {{else}}
+                      <button class="btn btn-success makeSureThatWeWon" data-toggle="modal"
+                      data-target="#tellThatWeWon"> Победа!
+                    </button>
+                      {{end}}
+                  {{else}}  
+                  <button class="btn btn-success makeSureThatWeWon" data-toggle="modal"
+                  data-target="#tellThatWeWon"> Победа!
+                </button>
+                  {{end}}
+  
+                 <br>
+                    <!-- <div class="input-group-prepend">
+                      <span class="input-group-text font-weight-bold">Со снижением (%): </span>
+                    </div>
+                    <input type="text-sm" class="form-control w-25"> -->
+                  </div>
+                </td>
+                <td class="pt-3-half">
+                  <div class="input-group  mb-3">
+                    
+
+
+                    {{if .AuctionIsFinished}}
+                        {{if .WeWon}}
+                        <button class="btn btn-dark makeSureThatWeLoosed" data-toggle="modal"
+                        data-target="#tellThatWeLoosed">Поражение</button>
+                        
+                        {{else}}
+                    
+                        <button class="btn btn-danger makeSureThatWeWon weLoosedThisOne" data-toggle="modal"
+                        data-target="#tellThatWeLoosed"> Отменить
+                      </button>
+                        {{end}}
+                    {{else}}  
+                    <button class="btn btn-dark makeSureThatWeLoosed" data-toggle="modal"
+                    data-target="#tellThatWeLoosed">Поражение</button>
+                    {{end}}
+
+
+
+                   <br>
+                    <!-- <div class="input-group-prepend">
+                      <span class="input-group-text font-weight-bold">Со снижением (%): </span>
+                    </div>
+                    <input type="text-sm" class="form-control w-25"> -->
+                  </div>
+                </td>
+                <td class="pt-3-half">
+                  <div class="input-group  mb-3">
+                    
+
+
+                    {{if .AuctionIsFinished}}
+                        {{if .WeWon}}
+                        <button class="btn btn-danger makeSureThatWeLoosed">Ошибка</button>
+                        
+                        {{else}}
+                    
+                        <button class="btn btn-danger makeSureThatWeWon weLoosedThisOne"> Отменить
+                      </button>
+                        {{end}}
+                    {{else}}  
+                    <button class="btn btn-danger makeSureThatWeLoosed">Ошибка</button>
+                    {{end}}
+
+
+
+                   <br>
+                    <!-- <div class="input-group-prepend">
+                      <span class="input-group-text font-weight-bold">Со снижением (%): </span>
+                    </div>
+                    <input type="text-sm" class="form-control w-25"> -->
+                  </div>
+                </td>
+              </tr>
+             
+              
+              {{if .ShowTimer}}
+              {{ else }}
+               <script>
+                    (function () {
+                      
+                    
+                    unix_timestamp = {{.TimeWhenWeGetMinutesBeforeLimit}}
+                    console.log(unix_timestamp)
+                    var date = new Date(unix_timestamp * 1000);
+
+                    var countDownDate = date.addMinutes(Number({{.MinutesToNextStepOverLimit}})).addSeconds(1).getTime();
+                    var xTimer = setInterval(function () {
+                      // Get today's date and time
+                      var now = new Date().getTime();
+                      // Find the distance between now and the count down date
+                      distance = countDownDate - now;
+                  
+                      // Time calculations for days, hours, minutes and seconds
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                      minutes = checkTime(minutes)
+                      seconds = checkTime(seconds)
+                      // Display the result in the element with id="demo"
+                      //document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                      document.getElementById("demo{{.Title}}").innerHTML = minutes + ":" + seconds;
+                      // If the count down is finished, write some text
+                      if (distance < 0 || document.getElementById("demo{{.Title}}").innerHTML == "ВРЕМЯ ИСТЕКЛО") {
+                        clearInterval(xTimer);
+                        // clearTimeout(timer);
+                        $('#auctionIsOver').modal('show');
+                        document.getElementById("demo{{.Title}}").innerHTML = "ВРЕМЯ ИСТЕКЛО";
+                        // localStorage.removeItem({{.AuctionID }})
+                        // localStorage.removeItem({{.AuctionID }} + '_aferOffer')
+                      }
+                    }, 1000);
+                  })();
+  
+              </script>
+            {{ end }}
+
+              {{ end }}     
+
+              
+
+            </tbody>
+          </table>
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+    <!-- Editable table -->
+
+
+    <div class="container">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Ответственный в за набор №{{.TableNumber}} в группе №1:</span>
+        </div>
+        <input type="text" class="form-control responsibleFromGroupOne" placeholder="ФИО" aria-label="ФИО" aria-describedby="basic-addon1" value="{{.ResponsibleFromGroupOne}}">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Ответственный в за набор №{{.TableNumber}} в группе №2:</span>
+        </div>
+        <input type="text" class="form-control responsibleFromGroupTwo" placeholder="ФИО" aria-label="ФИО" aria-describedby="basic-addon1" value="{{.ResponsibleFromGroupTwo}}">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Ответственный в за набор №{{.TableNumber}} в группе №3:</span>
+        </div>
+        <input type="text" class="form-control responsibleFromGroupThree" placeholder="ФИО" aria-label="ФИО" aria-describedby="basic-addon1" value="{{.ResponsibleFromGroupThree}}">
+      </div>
+    {{ end }}    
+
+  
+    <div id="tellThatWeWon" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-success">Изменить статус аукциона?</h4>
+            <button class="close" data-dismiss="modal">x</button>
+          </div>
+          <!-- <div class="modal-body">
+            <h4 class="modal-title text-success"></h4>
+          </div> -->
+          <div class="modal-footer justify-content-center">
+            <div lass="btn-group btn-group-justified" role="group">
+              <div class="btn-group" data-toggle="buttons">
+                <button id="shortWayToPlaceAnOffer" class="btn btn-success tellThatWeWonYes" data-toggle="modal"
+                  data-target="#securityAlert" data-dismiss="modal" >Да</button>
+                <button class="btn btn-primary" data-dismiss="modal">Нет</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="tellThatWeLoosed" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-danger">Изменить статус аукциона?</h4>
+            <button class="close" data-dismiss="modal">x</button>
+          </div>
+          <!-- <div class="modal-body">
+            <h4 class="modal-title text-success"></h4>
+          </div> -->
+          <div class="modal-footer justify-content-center">
+            <div lass="btn-group btn-group-justified" role="group">
+              <div class="btn-group" data-toggle="buttons">
+                <button id="shortWayToPlaceAnOffer" class="btn btn-danger tellThatWeLoosedYes" data-toggle="modal"
+                  data-target="#securityAlert" data-dismiss="modal" >Да</button>
+                <button class="btn btn-primary" data-dismiss="modal">Нет</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"></script> -->
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"> -->
+  <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
+
+
+
+  <!-- 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/signed-num.js"></script> -->
+
+
+
+
+
+  <!-- <script>$(document).ready(function () {
+      $('#example').DataTable({
+        columnDefs: [
+          { type: 'signed-num', targets: 0 }
+        ]
+      });
+    });
+    </script> -->
+  <!-- <script>
+    youCanGoToAuction = true
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    $('a').on('click', function (e) {
+      if (getRandomInt(1, 10) > 7 || !youCanGoToAuction) {
+        youCanGoToAuction = false
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    })
+
+  </script> -->
+  <script>
+  var classList
+  var et
+  $('.able-to-pulse').on('click', function (e) {
+      et = e.target
+      classList = e.target.classList
+      e.target.classList.remove('pulse');
+      localStorage.setItem($(e.target).closest('tr').find('span')[0].innerText, "clicked");
+    })
+
+
+    var allTRs = $('tr')
+
+    for (let i = 1; i <= allTRs.length - 1; i++) {
+      //console.log($(allTRs[i]).find('td:eq(0)').find('span')[0].innerText)
+      if (localStorage.getItem($(allTRs[i]).find('td:eq(0)').find('span')[0].innerText) != null) {
+        $(allTRs[i]).find('td:eq(3)').find('span')[0].classList.remove('pulse')
+      } else {
+        $(allTRs[i]).find('td:eq(3)').find('span')[0].classList.add('pulse')
+      }
+
+    }
+  </script>
+
+  <script>
+    const $tableID = $('#table');
+    const $BTN = $('#export-btn');
+    const $EXPORT = $('#export');
+
+    const newTr = `
+      <tr class="hide">
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half">
+          <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+          <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+        </td>
+        <td>
+          <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+        </td>
+      </tr>`;
+
+    // $('.table-add').on('click', 'i', () => {
+
+    //   const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+
+    //   if ($tableID.find('tbody tr').length === 0) {
+
+    //     $('tbody').append(newTr);
+    //   }
+
+    //   $tableID.find('table').append($clone);
+    // });
+
+    // $tableID.on('click', '.table-remove', function () {
+
+    //   $(this).parents('tr').detach();
+    // });
+
+    $tableID.on('click', '.table-up', function () {
+
+      const $row = $(this).parents('tr');
+
+      if ($row.index() === 1) {
+        return;
+      }
+
+      $row.prev().before($row.get(0));
+    });
+
+    $tableID.on('click', '.table-down', function () {
+
+      const $row = $(this).parents('tr');
+      $row.next().after($row.get(0));
+    });
+
+    // A few jQuery helpers for exporting only
+    jQuery.fn.pop = [].pop;
+    jQuery.fn.shift = [].shift;
+
+    $BTN.on('click', () => {
+
+      const $rows = $tableID.find('tr:not(:hidden)');
+      const headers = [];
+      const data = [];
+
+      // Get the headers (add special header logic here)
+      $($rows.shift()).find('th:not(:empty)').each(function () {
+
+        headers.push($(this).text().toLowerCase());
+      });
+
+      // Turn all existing rows into a loopable array
+      $rows.each(function () {
+        const $td = $(this).find('td');
+        const h = {};
+
+        // Use the headers from earlier to name our hash keys
+        headers.forEach((header, i) => {
+
+          h[header] = $td.eq(i).text();
+        });
+
+        data.push(h);
+      });
+
+      // Output the result
+      $EXPORT.text(JSON.stringify(data));
+    });
+
+    function changeOffer(that) {
+
+      // if (that.value < Number($("input.custom-range")[0].value)) {
+      //   that.value = Number($("input.custom-range")[0].value)
+      // }
+      rangeEl = that
+      // console.log(rangeEl)
+      $(that).closest(':has("input.custom-range")').find('input.form-control')[0].value = that.value
+      // priceFall = Number(rangeEl.value) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+      // $(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[3].innerText = priceFall
+      // $('input.custom-range').closest(':has(".pt-3-half")').find('.pt-3-half')[4].children[0].innerText = priceFall
+      // console.log(rangeEl.value - Number($("input.custom-range")[0].value))
+      // priceFallMinusGlobalFall = (rangeEl.value - Number($("input.custom-range")[0].value)) * Number($(rangeEl).closest(':has(".pt-3-half")').find('.pt-3-half')[1].innerText.replace(/[^0-9.]/g, "")) / 100
+
+      // $('#economy')[0].innerText = localeString(economyValue - priceFallMinusGlobalFall)
+      //economyValue = economyValue - priceFallMinusGlobalFall
+    }
+//  var that
+    function saveOurOffer(that) {
+      that = that
+      AuctionID = $(that).closest('tr').find('span')[1].innerText
+    
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'SaveOurFall',
+              AuctionID: AuctionID,
+		          OurFall: that.value
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+
+    function saveOffer(that) {
+
+      AuctionID = $(that).closest('tr').find('span')[1].innerText
+
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'SaveFall',
+              AuctionID: AuctionID,
+		          Fall: that.value
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    }
+
+
+    $('.percentOurFall').on('keydown', function (e) {
+      var prevValue = e.target.value;//$(this)[0].value;
+      setTimeout(function () {
+        var price = e.target
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\.\d{0,2})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+          }
+        }
+        saveOurOffer(e.target)
+        return true;
+      }, 1);
+    })
+
+    $('.percentFall').on('keydown', function (e) {
+      var prevValue = e.target.value;//$(this)[0].value;
+      setTimeout(function () {
+        var price = e.target
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\.\d{0,2})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+          }
+        }
+        saveOffer(e.target)
+        return true;
+      }, 1);
+    })
+
+    $('.minutesToNextStepOverLimit').on('keydown', function (e) {
+      
+      var prevValue = e.target.value;//$(this)[0].value;
+      setTimeout(function () {
+        var price = e.target
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\\d{0,0})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+          }
+        }
+        if (Number(price.value) < 0 || Number(price.value) >= 10){
+          price.value = prevValue;
+          return false;       
+        }
+        return true;
+      }, 1);
+    })
+    var AuctionID
+
+    $('.timeToNextStepOverTheLimit').on('click', function (e) {
+      // AuctionID = $(e.target).closest('tr')[0].children[0].innerText
+      AuctionID = $(e.target).closest('tr').find('span')[1].innerText
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'tellHowManyMinutesLeftToNextStepOverTheLimit',
+              AuctionID: AuctionID,
+		          Minutes: $(e.target).closest('td').find('input')[0].value
+
+            },
+            success: function (data) {
+              console.log(data)
+              $(e.target).closest('td').find('input')[0].value = ""
+            },
+          });
+    })
+
+    var eTarget
+
+   
+    $('.makeSureThatWeWon').on('click', function (e) {
+      eTarget = e.target
+    })
+ 
+    
+    $('.tellThatWeWonYes').on('click', function (e) {
+      AuctionID = $(eTarget).closest('tr').find('span')[1].innerText
+      
+      if (eTarget.classList.contains('weWonThisOne')){
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'cancelWon',
+              AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+
+      }else{
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'tellThatWeWon',
+              AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+      }
+    })
+
+    $('.makeSureThatWeLoosed').on('click', function (e) {
+      eTarget = e.target
+    })
+
+    $('.tellThatWeLoosedYes').on('click', function (e) {
+      AuctionID = $(eTarget).closest('tr').find('span')[1].innerText
+      
+      if (eTarget.classList.contains('weLoosedThisOne')){
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'cancelLoose',
+              AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+
+      }else{
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'tellThatWeLoosed',
+              AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+      }
+    })
+
+
+    $('.responsibleFromGroupOne').on('keyup', function (e) {
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'responsibleFromGroupOne',
+              User: e.target.value//,
+              // AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    })
+    $('.responsibleFromGroupTwo').on('keyup', function (e) {
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'responsibleFromGroupTwo',
+              User: e.target.value//,
+              // AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    })
+    $('.responsibleFromGroupThree').on('keyup', function (e) {
+      $.ajax({
+            //url: window.location.href,
+            method: "POST",
+            data: {             
+              Method: 'responsibleFromGroupThree',
+              User: e.target.value
+              //,
+              // AuctionID: AuctionID
+
+            },
+            success: function (data) {
+              console.log(data)
+            },
+          });
+    })   
+  </script>
+</body>
+
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Разработчик: Ермешев Марат, АО "Третий парк", ErmMarat@gmail.com</a>
+</nav>
+
+</html>

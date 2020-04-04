@@ -1,0 +1,411 @@
+{
+  "display_name": "Auction",
+  "fields": {
+    "ApplicationDeadline": {
+      "display_name": "Application Deadline",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "AreWeInvolved": {
+      "display_name": "Are We Involved",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "AuctionID": {
+      "display_name": "Auction ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "AuctionIsFinished": {
+      "display_name": "Auction Is Finished",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "AuthorOfInvolved": {
+      "display_name": "Author Of Involved",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "BidDuration": {
+      "display_name": "Bid Duration",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "BiddingFinish": {
+      "display_name": "Bidding Finish",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "BiddingStart": {
+      "display_name": "Bidding Start",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Cost": {
+      "display_name": "Cost",
+      "help": "",
+      "pattern_msg": "Your input must be a number.",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "CurrentBestOfferParticipant": {
+      "display_name": "Current Best Offer Participant",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "CurrentBestOfferPrice": {
+      "display_name": "Current Best Offer Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "CurrentBestOfferTime": {
+      "display_name": "Current Best Offer Time",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "CurrentFall": {
+      "display_name": "Current Fall",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "CurrentPrice": {
+      "display_name": "Current Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "EstimatedDatesAndEndTime": {
+      "display_name": "Estimated Dates And End Time",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Fall": {
+      "display_name": "Fall",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "FallLimit": {
+      "display_name": "Fall Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "FivePercentsOfInitialPrice": {
+      "display_name": "Five Percents Of Initial Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "GOR": {
+      "display_name": "GOR",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "HalfPercentOfInitialPrice": {
+      "display_name": "Half Percent Of Initial Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "HowLongOneComputerWillLag": {
+      "display_name": "How Long One Computer Will Lag",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "InitialPrice": {
+      "display_name": "Initial Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "InitilPrice": {
+      "display_name": "Initil Price",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "LotNumber": {
+      "display_name": "Lot Number",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "MinutesToNextStepOverLimit": {
+      "display_name": "Minutes To Next Step Over Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NotificationPublication": {
+      "display_name": "Notification Publication",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberInCollection": {
+      "display_name": "Number In Collection",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfCollection": {
+      "display_name": "Number Of Collection",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfVehicles": {
+      "display_name": "Number Of Vehicles",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfVehiclesBK": {
+      "display_name": "Number Of Vehicles BK",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfVehiclesSK1": {
+      "display_name": "Number Of Vehicles SK 1",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "NumberOfVehiclesSK2": {
+      "display_name": "Number Of Vehicles SK 2",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "OneComputerIsLagging": {
+      "display_name": "One Computer Is Lagging",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Organizer": {
+      "display_name": "Organizer",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "OurAuction": {
+      "display_name": "Our Auction",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "OurFall": {
+      "display_name": "Our Fall",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForInvolve": {
+      "display_name": "Person Responsible For Involve",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForLimit": {
+      "display_name": "Person Responsible For Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForOur": {
+      "display_name": "Person Responsible For Our",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PlanFallLimit": {
+      "display_name": "Plan Fall Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Priority": {
+      "display_name": "Priority",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "RegNumber": {
+      "display_name": "Reg Number",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Status": {
+      "display_name": "Status",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "TimeToFinish": {
+      "display_name": "Time To Finish",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "TimeWhenWeGetAMessageHowManyMinutesLeftToStepOverTheLimit": {
+      "display_name": "Time When We Get A Message How Many Minutes Left To Step Over The Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "TimeWhenWeGetMinutesBeforeLimit": {
+      "display_name": "Time When We Get Minutes Before Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "TotalOffersSubmitted": {
+      "display_name": "Total Offers Submitted",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "VIT": {
+      "display_name": "VIT",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "WeLoosed": {
+      "display_name": "We Loosed",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "WeWon": {
+      "display_name": "We Won",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "YourCurrentPosition": {
+      "display_name": "Your Current Position",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "YourFallLimit": {
+      "display_name": "Your Fall Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "YourFallLimitToLoose": {
+      "display_name": "Your Fall Limit To Loose",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "YourFallLimitToWin": {
+      "display_name": "Your Fall Limit To Win",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "YourLastOffer": {
+      "display_name": "Your Last Offer",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ZEL": {
+      "display_name": "ZEL",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

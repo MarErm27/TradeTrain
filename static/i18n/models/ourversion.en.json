@@ -1,0 +1,47 @@
+{
+  "display_name": "Our Version",
+  "fields": {
+    "Auction": {
+      "display_name": "Auction",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Date": {
+      "display_name": "Date",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Number": {
+      "display_name": "Number",
+      "help": "version number",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "OurAuction": {
+      "display_name": "Our Auction",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForOur": {
+      "display_name": "Person Responsible For Our",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

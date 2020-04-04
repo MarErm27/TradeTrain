@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Тренажер для закупок</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <script src="https://use.fontawesome.com/99a9553d81.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+        integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/brands.min.js"
+        integrity="sha384-KASsDRWwlErb8dTf+e5TxRXMnbXrVlbPbn1hS5B/yS4vNsF7mHHO+Gw1bBDhcyOt"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/conflict-detection.min.js"
+    integrity="sha384-fHnSzPZE3xYvvXY0y51vln9J+Jd0eK4HughCkcA0NsBpmAGgU97n65RbDqUgnWf1"
+    crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"
+        integrity="sha384-H4naMsxnUrIT8qihjWfwIKXi5biIYnqUsQ+vIJGZIKfA+7/O3FxgvMrdH77X+aID"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/regular.min.js"
+        integrity="sha384-yUk5aOIIy62R2bRFbFq0+bo+ChWYs75cusETAJ1KYvEMRiEbQZmNU6u+PK60t536"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/solid.min.js"
+        integrity="sha384-OSCcNUu98kEBVxq0vZaBr0wdmmd2ojuJwvWuSRKD0V10PWmvTetja8mxGfZm5PsV"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/v4-shims.min.js"
+        integrity="sha384-/OZ1Lht4J1/FfstamqqFX1tF7PkDWDKbvat1bkWByC2KRJwGzm/H2bVuw8N4SD8y"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+        /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+        p.lead {
+            padding-left: 15px;
+
+        }
+
+        div.container {
+            max-width: 100%;
+            padding-bottom: 80px;
+        }
+
+        .pt-3-half {
+            padding-top: 1.4rem;
+        }
+
+        /* .container{
+    max-width: 100%;
+} */
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="container-fluid">
+        <br>
+
+
+        <!-- Панель навигации -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-top">
+
+            <a href="#" class="navbar-brand">Реестровые номера</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+
+                        <a href="#" class="nav-link">Аукционы<span class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="nav-item dropdown">
+
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Помощь</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#memo"
+                                data-dismiss="modal">Памятка</a>
+
+                            <!-- <a href="#" class="dropdown-item" data-toggle="modal" data-target="#tips"
+                data-dismiss="modal">Подсказки</a> -->
+
+                            <!-- <a href="#" class="dropdown-item">Action</a>
+
+              <a href="#" class="dropdown-item">Another action</a> -->
+                            <!-- <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">Роли (в разработке)</h6>
+              <a class="dropdown-item">Группа-1</a>
+              <a class="dropdown-item">Группа-2</a>
+              <a class="dropdown-item">Группа-3</a>
+              <h6 class="dropdown-header">Сценарии (в разработке)</h6>
+              <a class="dropdown-item">Отключение электричества</a>
+              <a class="dropdown-item">Отключение проводного интернета</a>
+              <a class="dropdown-item">Отключение мобильного интернета</a>
+              <div class="dropdown-divider"></div> -->
+
+                            <a id="aboutProgramm" href="#" class="dropdown-item" data-toggle="modal"
+                                data-target="#aboutProgrammInfo" data-dismiss="modal">О программе</a>
+
+                        </div>
+
+                    </li>
+                    <!-- 
+          <li class="nav-item">
+
+            <a href="#" class="nav-link disabled">Disabled</a>
+
+          </li> -->
+
+                </ul>
+
+
+
+                <!-- <input type="search" class="form-control mr-sm-2" placeholder="" aria-label="search"> -->
+
+                <button class="btn btn-outline-success my-2 my-sm-0">Главная</button>
+                <button class="btn btn-outline-success my-2 my-sm-0">Выход</button>
+
+
+
+            </div>
+
+        </nav>
+
+
+
+        <!-- Конец панели навигации -->
+        <!-- <p class="lead bg-light">Электронные аукционы</p> -->
+    </div>
+    <!-- Джумботрон -->
+
+
+
+
+
+
+    <!-- Конец джумботрона -->
+
+    <div class="container">
+        <button class="btn btn-primary" id="CleanBD">Очистить БД</button><br>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="setAllAuctionStartTime">Установить время начала всех аукционов</button><br>
+            </div>
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        $('#CleanBD').on('click', function (e) {
+            $.ajax({
+                //url: window.location.href,
+                method: "POST",
+                data: {
+
+                    Method: 'CleanDB'
+                },
+
+                success: function (data) {
+                    console.log("CleanBD")
+                },
+            });
+
+        })
+        $('#setAllAuctionStartTime').on('click', function (e) {
+            timeToSet = $('#datetimepicker2').find('input')[0].value
+            if (timeToSet != ""){
+   
+            dateString = timeToSet.substr(3, 2)+"."+timeToSet.substr(0, 2)+"."+timeToSet.substr(6, 4) + timeToSet.substr(10)
+            formatedTimeToSet = new Date(dateString)
+            unixTimeToSet = formatedTimeToSet.getTime() / 1000
+            $.ajax({
+                //url: window.location.href,
+                method: "POST",
+                data: {
+                    Method: 'setAllAuctionStartTime',
+                    UnixTimeToSet : unixTimeToSet
+                },
+
+                success: function (data) {
+                    console.log("setAllAuctionStartTime")
+                },
+            });
+        }
+        })
+    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker2').datetimepicker({
+                locale: 'ru'
+            });
+        });
+    </script>
+    <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Разработчик: Ермешев Марат, АО "Третий парк", ErmMarat@gmail.com</a>
+    </nav>
+
+</html>

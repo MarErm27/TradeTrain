@@ -1,0 +1,40 @@
+{
+  "display_name": "Set",
+  "fields": {
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ResponsibleFromGroupOne": {
+      "display_name": "Responsible From Group One",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ResponsibleFromGroupThree": {
+      "display_name": "Responsible From Group Three",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ResponsibleFromGroupTwo": {
+      "display_name": "Responsible From Group Two",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

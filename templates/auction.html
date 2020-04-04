@@ -1,0 +1,1817 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Bid simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    /* .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    } */
+    /* .table-responsive {
+      padding-left: 160px;
+      padding-right: 160px;
+      padding-bottom: 40px;
+    }    */
+    p.lead {
+      padding-left: 15px;
+
+    }
+
+    div.container {
+      max-width: 100%;
+      padding-bottom: 80px;
+    }
+
+    .my-custom-scrollbar {
+      position: relative;
+      height: 400px;
+      overflow: auto;
+    }
+
+    .table-wrapper-scroll-y {
+      display: block;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      background: yellow;
+    }
+    .custom-range::-webkit-slider-thumb:active{
+      background-color:yellow;
+    }
+    .custom-range::-webkit-slider-thumb{
+      box-shadow:yellow;
+    }
+
+    /* .custom-range::-moz-range-thumb {
+      background: yellow;
+    }
+
+    .custom-range::-ms-thumb {
+      background: yellow;
+    } */
+  </style>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+  <script>
+      function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+    AuctionID = findGetParameter('AuctionID')
+  </script>
+  {{if .OneComputerIsLagging}}
+      {{if .StartLagAccessDenied}}
+      <script>
+        // alert('StartLagAccessDenied')
+        localStorage.setItem("AccessDenied" + AuctionID, "");
+      </script>
+      
+      {{else}}
+      <!-- <script>
+        alert('elseStartLagAccessDenied')
+        localStorage.removeItem("AccessDenied" + AuctionID)
+      </script> -->
+      {{end}}
+      <script>
+        // alert('OneComputerIsLagging')
+        storedAccessStatus = localStorage.getItem("AccessDenied" + AuctionID)
+        if (storedAccessStatus != null){
+          noAccessPage = '<div class="text-center">\
+              <img src="/static/img/noAccess.png" class="img-fluid">\
+          </div>'
+          document.documentElement.innerHTML = noAccessPage
+        }
+     </script>
+
+  {{else}}
+      <script>
+        // alert('elseOneComputerIsLagging')
+        localStorage.removeItem("AccessDenied" + AuctionID)
+      </script>
+      {{if .StartLagAccessDenied}}
+      <!-- <script>
+        alert('StartLagAccessDenied')
+        localStorage.setItem("AccessDenied" + AuctionID, "");
+      </script> -->
+      
+      {{else}}
+      
+      {{end}}
+  {{end}}
+  <script>
+    function getRandomArbitary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    fullStopYourComputerIsLagging = false
+  </script>
+  <div class="container">
+
+    <br>
+
+    <!-- Панель навигации -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-top">
+
+      <a href="#" class="navbar-brand">Тренажер для закупок</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">
+
+            <a id="auctionList" href="/http_handler/ListOfAuctions" class="nav-link">Аукционы<span
+                class="sr-only">(current)</span></a>
+
+          </li>
+
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Пользователи</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Сообщения</a>
+
+          </li>
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">Статистика</a>
+
+          </li>
+          <li class="nav-item dropdown">
+
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Помощь</a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#memo" data-dismiss="modal">Памятка</a>
+              <!-- <a href="#" class="dropdown-item" data-toggle="modal" data-target="#tips"
+                data-dismiss="modal">Подсказки</a> -->
+              <!-- <a id="speedUp" class="dropdown-item">Ускорение</a> -->
+
+              <!-- <a href="#" class="dropdown-item">Action</a>
+
+              <a href="#" class="dropdown-item">Another action</a> -->
+              <!-- <div class="dropdown-divider"></div> -->
+              <!-- <h6 class="dropdown-header">Роли (в разработке)</h6>
+              <a class="dropdown-item">Группа-1</a>
+              <a class="dropdown-item">Группа-2</a>
+              <a class="dropdown-item">Группа-3</a>
+              <h6 class="dropdown-header">Сценарии (в разработке)</h6>
+              <a class="dropdown-item">Отключение электричества</a>
+              <a class="dropdown-item">Отключение проводного интернета</a>
+              <a class="dropdown-item">Отключение мобильного интернета</a> -->
+              <!-- <div class="dropdown-divider"></div> -->
+
+              <a id="aboutProgramm" href="#" class="dropdown-item" data-toggle="modal" data-target="#aboutProgrammInfo"
+                data-dismiss="modal">О программе</a>
+
+            </div>
+
+          </li>
+          <!-- 
+          <li class="nav-item">
+
+            <a href="#" class="nav-link disabled">Disabled</a>
+
+          </li> -->
+
+        </ul>
+
+        <!-- <form class="form-inline my-2 my-lg-0"> -->
+
+        <!-- <input type="search" class="form-control mr-sm-2" placeholder="" aria-label="search"> -->
+        <div>
+          <button class="btn btn-outline-success my-2 my-sm-0">Главная</button>
+          <button class="btn btn-outline-success my-2 my-sm-0">Выход</button>
+        </div>
+        <!-- </form> -->
+
+      </div>
+
+    </nav>
+
+
+
+    <!-- Конец панели навигации -->
+
+
+
+    <!-- Джумботрон -->
+
+
+
+
+
+
+    <p class="lead bg-light">Торги<br>
+      <span id="auctionID">{{.AuctionID}}</span> - {{.Name}}</p>
+
+
+
+
+
+
+    <!-- Конец джумботрона -->
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div id="startPrice" class="col-md-5">
+          <span>Начальная цена: </span><span class="font-weight-bold">{{.InitialPrice}}</span>
+        </div>
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-6">Лучшее предложение</div>
+            <div class="col-md-6"><span>Продолжительность торгов: </span><span id="rocket"
+                class="font-weight-bold">00:00:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <!-- <p class="text">1</p> -->
+          <div class="text-danger"><span class="text-danger">Текущая цена: </span><span
+              class="text-danger font-weight-bold" id="currentPrice">отсутствует</span></div>
+        </div>
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-6 text-danger" id="bestPretendent">На данный момент отсутствует</div>
+            <div class="col-md-6"><span>Всего предложений подано: </span><span id="numberOfOffers"
+                class="font-weight-bold">{{.AmountOfOffersThatWerePosted}}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <div><span>Текущее снижение: </span><span id="currentFall" class="font-weight-bold">0%</span></div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-6"><span id="timeOfBestOffer" class="text-danger"></span>
+              <div id="sumOfBestOffer" class="text-danger font-weight-bold"></div>
+            </div>
+            <div class="col-md-6"><span>Расчетные даты и время окончания: </span><span id="finishTime"
+                class="font-weight-bold"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <span>Ваше последнее ценовое предложение: </span><span id="yourLastOffer"
+            class="font-weight-bold">отсутствует</span>
+        </div>
+        <div class="col-md-7">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <span>Ваша текущая позиция:</span> <span id="yourCurrentPosition" class="font-weight-bold">-</span>
+        </div>
+        <div class="col-md-7">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <p class="text-danger"><span>Времени до окончания: </span><span class="font-weight-bold" id="demo"> </span>
+          </p>
+        </div>
+        <div class="col-md-7">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-6">Новое ценовое предложение
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-7"><input class="form-control" id="newPrice" placeholder="" aria-label=""
+            aria-describedby="basic-addon1">
+          <button type="button" id="PlaceAnOffer" class="btn btn-primary" data-toggle="modal"
+            data-target="#yourOffer">Подать предложение</button>
+          <div id="yourOffer" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Ваше предложение</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">Уведомление о подаче предложения о цене контракта в ходе электронного
+                  аукциона.<br>
+                  Реестровый номер документа: <span id="docNumber">{{.AuctionID}}</span><br>
+                  Участник аукциона: Акционерное Общество "Третий парк"<br>
+                  Сумма, указанная в ценовом предложении: <span id="yoursOfferPrice"></span><br>
+                  Дата подачи предложения: <span id="timeOfAnOffer"></span> (время сервера) <br>
+                  <!-- Время подачи предложения: (время сервера) <br><br> -->
+                  <span class="font-weight-bold">Для подачи данного ценового предложения заверьте его ЭП, нажав кнопку
+                    «Да»</span>
+                  <br><br>
+
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <div lass="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" data-toggle="buttons">
+                      <button id="shortWayToPlaceAnOffer" class="btn btn-primary" data-toggle="modal"
+                        data-target="#securityAlert" data-dismiss="modal">Да</button>
+                      <button class="btn btn-danger" data-dismiss="modal">Нет</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="securityAlert" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Security Alert</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">This Web site need access to digital certificates on this computer.<br><br>
+                  WARNING: By allowing access to your certificates, this Web site will also gain accesse to any personal
+                  information that are stored in your certificates. <br><br>
+                  Do you want this Web site to gain access to the certificates on this computer now?<br>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <div lass="btn-group btn-group-justified" role="group">
+                    <div class="btn-group col-md-12" data-toggle="buttons">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#windowsSecurity"
+                        data-dismiss="modal">Yes</button>
+                      <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="windowsSecurity" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Безопасность Windows</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                  <h1 class="text-lg text-primary">Список сертификатов</h1><br>
+                  Выберите сертификат для подписи документа:
+                  <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select class="form-control" id="sel1">
+                      <option>АО "Третий парк"</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <div lass="btn-group btn-group-justified" role="group">
+                    <div class="btn-group col-md-12" data-toggle="buttons">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#securityAlert2"
+                        data-dismiss="modal">Yes</button>
+                      <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="securityAlert2" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Security Alert</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">This Web site need access to create a digital signature using your private
+                  key.<br><br>
+                  WARNING: Allowing an untrusted Web site to use your private key is a security risk. The Web site could
+                  use your private key to compromise data or assume your identity.<br><br>
+                  Do you want this Web site to create the signature now?<br>
+                  <div class="custom-control custom-checkbox">
+                    <input id="doNotShowLongWay" type="checkbox" class="custom-control-input">
+                    <label class="custom-control-label" for="doNotShowLongWay">Do not show this dialog box
+                      again.</label>
+                  </div>
+                  If your select this checkbox, any Web pages withing this site will be able to create digital
+                  signatures without prompting you again. However, you will be prompted again when you visit another Web
+                  site.
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <div lass="btn-group btn-group-justified" role="group">
+                    <div class="btn-group col-md-12" data-toggle="buttons">
+                      <button id="longWayToPlaceAnOffer" class="btn btn-primary" data-toggle="modal"
+                        data-target="#yourOfferIsAccepted" data-dismiss="modal">Yes</button>
+                      <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="yourOfferIsAccepted" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Успешно</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">Ваше предложение принято
+                  <div class="modal-footer justify-content-center">
+                    <div lass="btn-group btn-group-justified" role="group">
+                      <div class="btn-group col-md-12" data-toggle="buttons">
+                        <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="yourOfferIsDenied" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Успешно</h4>
+                  <button class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">Ваше предложение не входит в разрешенный диапазон. Возможно, другой участник
+                  успел сделать свое предложение раньше Вас. Ваше предложение учтено для определения вторых и третьих
+                  мест, но таймер не будет перезапущен.
+                  <div class="modal-footer justify-content-center">
+                    <div lass="btn-group btn-group-justified" role="group">
+                      <div class="btn-group col-md-12" data-toggle="buttons">
+                        <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="auctionIsOver" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Предупреждение</h4>
+              <button class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">Аукцион завершен. <br>
+              Протокол проведения электронного аукциона будет опубликован в течении 15 минут.
+              <div class="modal-footer justify-content-center">
+                <div lass="btn-group btn-group-justified" role="group">
+                  <div class="btn-group col-md-12" data-toggle="buttons">
+                    <!-- <button class="btn btn-primary" data-dismiss="modal">OK</button> -->
+                    <button id="retrurnToAuctionList" class="btn btn-link" data-dismiss="modal">Вернуться в личный
+                      кабинет</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="aboutProgrammInfo" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">О программе</h4>
+              <button class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">Разработчик: Ермешев Марат <br>
+              Организация: АО "Третий парк"<br>
+              E-mail: ErmMarat@gmail.com
+              <div class="modal-footer">
+                <div lass="btn-group btn-group-justified" role="group">
+                  <div class="btn-group col-md-12" data-toggle="buttons">
+                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="memo" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Памятка</h4>
+              <button class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+              <div><span class="font-weight-bold">1) Зависание комьютера:</span> перезагрузить вкладку браузера, если не
+                получается - перезагрузить компьютер.
+              </div>
+              <div><span class="font-weight-bold">2) Отключение интернета:</span> сменить источник интернета. </div>
+              <div><span class="font-weight-bold">3) Отключение площадки:</span> взять телефон и начать снимать видео,
+                на
+                котором у Вас не работает площадка,
+                затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+                после чего авторизуетесь на площадке
+                <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+                что компьютер настроен правильно.</div>
+              <div><span class="font-weight-bold">4) Не подается предложение:</span> взять телефон и начать снимать
+                видео, на котором у Вас работает площадка,
+                но не подается предложение,
+                затем Вы открываете <a href="https://www.google.com">любой сайт</a>, чтобы показать, что интернет есть,
+                после чего авторизуетесь на площадке
+                <a href="https://login.sberbank-ast.ru/Login.aspx">Сбербанк-АСТ (вход через ЕСИА)</a>, чтобы показать,
+                что компьютер настроен правильно.</div>
+              <div class="modal-footer">
+                <div lass="btn-group btn-group-justified" role="group">
+                  <div class="btn-group col-md-12" data-toggle="buttons">
+                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tips" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Подсказки</h4>
+              <button class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+              1) Во время подачи предложения можно выбрать опцию не показывать окна с предупреждениями. Попробуйте:<br>
+              <div class="custom-control custom-checkbox">
+                <input id="doNotShowLongWayTips" type="checkbox" class="custom-control-input">
+                <label class="custom-control-label" for="doNotShowLongWayTips">Do not show this dialog box
+                  again.</label>
+              </div><br>
+              2) Подача предложения вне шага аукциона: Вы можете нажать кнопку<br> <button type="button"
+                class="btn btn-primary">Подать предложение</button><br>, после чего система
+              попросит Вас подтвердить Ваше решение. Между этими двумя действиями может пройти достаточно времени, чтобы
+              другой участник успел подать свое предложение, в результате чего Ваше предложение окажется вне диапазона
+              разрешенного ценового предложения. Ваше предложение будет записано, <span
+                class="text-danger font-weight-bold">но таймер не будет перезапущен!</span><br>
+              <span class="font-weight-bold">Необходимо учитывать это и следить за таймером.</span><br><br>
+
+              3) В этой обучающей модели предусмотрен ускоренный режим, при включении которого другие участники аукциона
+              начинают делать свои ходы в течении первых тридцати секунд каждого шага. Для включения ускоренного режима
+              выберите пункт меню
+              Помощь - Ускорение. Для выключения режима - нажмите снова.
+
+              <a id="speedUpTips" class="dropdown-item">Ускорение</a>
+
+              <div class="modal-footer">
+                <div lass="btn-group btn-group-justified" role="group">
+                  <div class="btn-group col-md-12" data-toggle="buttons">
+                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="youCanMakeAnOfferFromFromToTo" class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-7">
+          <!-- Разрешается подать ценовое предложение от<button type="number" id="from" class="btn btn-link">76 615
+            000</button>
+          до<button type="number" id="to" class="btn btn-link">73 150 000</button> -->
+          <label for="customRange1">Предложение о цене контракта</label>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Шаг аукциона </label>
+              <labe class="text-success font-weight-bold" id="offerFromRange"> </label>
+            </div>
+            <div class="col-md-6">
+              <input type="range" class="custom-range" value="0" min="0.5" max="5" step="0.5" id="customRange1"
+                oninput="changeOffer(this.value)">
+            </div>
+          </div>
+        </div>
+
+        <div id="youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem" style="display: none">
+          Разрешается также подать ценовое предложение от<button type="number"
+            id="fromCurrentPricePlusOneAndHalfPercent" class="btn btn-link"></button>
+          до<button type="number" id="toCurrentPrice" class="btn btn-link"></button> <br>
+          (Аукцион в данном случае продлен не будет).
+        </div>
+      </div>
+
+    </div>
+
+    <div id="youCantMakeAnOffer" style="display: none" class="row">
+      <div class="col-md-5"></div>
+      <div class="col-md-7">Ваше предложение лидирует, Вы не можете подавать предложения меньше Вашего лидирующего
+        предложения.
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+          <table id="table" class="table table-bordered table-hover table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Участник</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Дата и время</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr>
+                  <th scope="row">1</th>
+                  <td>Первый участник</td>
+                  <td>76 000 000</td>
+                  <td>Сейчас</td>
+                </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <canvas id="scatterChart"></canvas>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="input-group  mb-3">
+        <div class="form-group row">
+          <div class="input-group-prepend">
+            <button id="pageUpdateNow" class="btn btn-success"> Обновить страницу (автоматическое обновление через: <span
+                id="nextPageUpdateTime"></span>) </button>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Время обновления страницы &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <input id="setPageUpdatePeriod" type="text-sm" class="form-control w-25">
+          <div class="input-group-append">
+            <span class="input-group-text">сек.</span>
+          </div>
+          <div class="input-group-append">
+            <button id="setNewPageUpdatePeriod" class="btn btn-success"> Установить </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script>
+
+    n = 0
+    function setChart(dataArray) {
+      var ctxSc = document.getElementById('scatterChart').getContext('2d');
+      var scatterData = {
+        datasets: [{
+          borderColor: 'rgba(99,0,125, .2)',
+          backgroundColor: 'rgba(99,0,125, .5)',
+          label: 'Цена контракта тыс. руб.',
+          data: dataArray
+        }]
+      }
+
+      var config1 = new Chart.Scatter(ctxSc, {
+        data: scatterData,
+        options: {
+          // title: {
+          //   display: true,
+          //   text: 'Scatter Chart - Logarithmic X-Axis'
+          // },
+          scales: {
+            xAxes: [{
+              type: 'linear',
+              position: 'bottom',
+              ticks: {
+                userCallback: function (tick) {
+                  //return ''
+                  var remain = tick / (Math.pow(10, Math.floor(Chart.helpers.log10(tick))));
+                  if (remain === 1 || remain === 2 || remain === 5) {
+                    return tick.toString();
+                  }
+                  return '';
+                },
+              },
+              scaleLabel: {
+                labelString: 'Номер предложения',
+                display: true,
+              }
+            }],
+            yAxes: [{
+              beginAtZero: false,
+              type: 'linear',
+              // ticks: {
+              //   userCallback: function (tick) {
+              //     return -tick.toString();
+              //   }
+              // },
+              scaleLabel: {
+                labelString: 'Предложение',
+                display: true
+              }
+            }]
+          }
+        }
+      });
+    }
+  </script>
+  <script>
+
+    function roundUp(num, precision) {
+      precision = Math.pow(10, precision)
+      return Math.ceil(num * precision) / precision
+    }
+    currentFallNumber = roundUp(Number({{.CurrentFall }}), 2)
+    $('#currentFall')[0].innerText = currentFallNumber + '%'
+    $('.progress-bar').css('width', currentFallNumber + '%')
+    Date.prototype.addMinutes = function (minutes) {
+      this.setMinutes(this.getMinutes() + minutes);
+      return this;
+    };
+    Date.prototype.addSeconds = function (seconds) {
+      this.setSeconds(this.getSeconds() + seconds);
+      return this;
+    };
+    var CreateObject = function (i, j) {
+      var myObj = new Object();
+      myObj.x = i;
+      myObj.y = j;
+      return myObj
+    }
+    var CreateObjectOfOffersAndTime = function (nameOfPartisipant, i, j, q) {
+      var myObj = new Object();
+      myObj.numberForSorting = arrayOfOffers.length
+      myObj.participant = nameOfPartisipant;
+      myObj.offer = i;
+      myObj.date = j.toLocaleString('ru', options);
+      myObj.isUser = q;
+      return myObj
+    }
+    function timeConverter(UNIX_timestamp) {
+      var a = new Date(UNIX_timestamp * 1000);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var year = a.getFullYear();
+      var month = checkTime(a.getMonth());
+      var date = checkTime(a.getDate());
+      var hour = checkTime(a.getHours());
+      var min = checkTime(a.getMinutes());
+      var sec = checkTime(a.getSeconds());
+      var time = date + '.' + month + '.' + year + ', ' + hour + ':' + min + ':' + sec;
+      return time;
+    }
+
+    var distance
+    var d = new Date();
+
+    // var countDownDate = d.addMinutes(1).addSeconds(1).getTime();
+ 
+
+
+
+
+
+    let t = {{.BidDuration}}
+    let unix_timestamp
+    var startPrice = Number({{.InitialPrice}}.replace(/[^0-9.]/g, ""))
+    var currentPrice = Number({{.CurrentPrice}}.replace(/[^0-9.]/g, ""))
+    if ({{.thereWasOffersBefore }}) {
+      $('#currentPrice')[0].innerText = {{.CurrentPrice}}
+
+      if ({{.BestPretendentName}} != "Акционерное Общество \"Третий парк\""){
+        bestParticipantName = "Участник " + {{.BestPretendentName}}
+      }else{
+        bestParticipantName = {{.BestPretendentName}}
+
+      }
+      $('#bestPretendent')[0].innerText = bestParticipantName
+      $('#timeOfBestOffer')[0].innerText = timeConverter({{.lastOfferTime}})
+      $('#sumOfBestOffer')[0].innerText = localeString({{.BestPretendentBid}})
+      unix_timestamp = {{.lastOfferTime}}
+    }else{
+      unix_timestamp = {{.BiddingStart}}
+    }
+    
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    var date = new Date(unix_timestamp * 1000);
+
+    var countDownDate = date.addMinutes(10).addSeconds(1).getTime();
+
+
+    if ({{.thereWasYourOffer}}) {
+      $('#yourLastOffer')[0].innerText = localeString({{.YourLastOffer}})
+      $('#yourCurrentPosition')[0].innerText = {{.YourCurrentPosition}}
+    }
+    
+
+    // arrayOfOffers = storedActiveOffers
+    // storedActiveOffers.sort(function (a, b) { return a.numberForSorting - b.numberForSorting })
+    // var storedArrayLength = storedActiveOffers.length;
+    // for (var i = 0; i < storedArrayLength; i++) {
+    //   var tr = '<tr>\
+    //     <th scope="row"> # </th>\
+    //     <td>'+ storedActiveOffers[i].participant + '</td>\
+    //     <td>'+ localeString(storedActiveOffers[i].offer) + '</td>\
+    //     <td>'+ storedActiveOffers[i].date.toLocaleString('ru', options) + '</td>\
+    //     </tr>';
+    //   $('#table').prepend(tr);
+
+    // }
+
+    if ({{.BestPretendentName}} == "Акционерное Общество \"Третий парк\""){
+      $('#PlaceAnOffer')[0].disabled = true
+    }else{
+      $('#PlaceAnOffer')[0].disabled = false
+    }
+
+// 
+
+ 
+    var numberOfOffersInATableOfOffers = 0
+    var dataArray = [];
+    var timeOfLastOffer
+    {{range.offersTable}}
+    if ({{.Participant}} != "Акционерное Общество \"Третий парк\""){
+      participantName = "Участник " + {{.Participant}}
+    }else{
+      participantName = {{.Participant}}
+    }
+    timeOfLastOffer = {{.BidTime}}
+    var tr = '<tr>\
+          <th scope="row"> # </th>\
+          <td>'+ participantName + '</td>\
+          <td>'+ {{.Bid}} + '</td>\
+          <td>'+ timeConverter(timeOfLastOffer) + '</td>\
+          </tr>';
+    $('#table').prepend(tr);
+    numberOfOffersInATableOfOffers += 1
+    var obj = CreateObject(numberOfOffersInATableOfOffers, Number({{.Bid}}.replace(/[^0-9.]/g, ""))); 
+    dataArray.push(obj);
+    {{end}}
+
+    //add other params if you need
+      
+    setChart(dataArray)
+
+    halfPercent = startPrice / 200;
+    fivePercent = startPrice / 20;
+    function localeString(x, sep, grp) {
+      var sx = ('' + x).split('.'), s = '', i, j;
+      sep || (sep = ' '); // default seperator
+      grp || grp === 0 || (grp = 3); // default grouping
+      i = sx[0].length;
+      while (i > grp) {
+        j = i - grp;
+        s = sep + sx[0].slice(j, i) + s;
+        i = j;
+      }
+      s = sx[0].slice(0, i) + s;
+      sx[0] = s;
+      return sx.join('.');
+    }
+    var options = {
+      // era: 'long',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      // weekday: 'long',
+      timezone: 'UTC',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+    var dUpdate = new Date();
+    // console.log($('#newPrice')[0].value)
+    storedData = localStorage.getItem({{.AuctionID }})
+    var arrayOfOffers = []
+    // var dataArray = [];
+    if (storedData != null) {
+
+       storedDataParsedOnce = JSON.parse(storedData)
+       $('#setPageUpdatePeriod')[0].value = storedDataParsedOnce.pageUpdatePeriod
+       $('#doNotShowLongWay')[0].checked = storedDataParsedOnce.doNotShowLongWay
+       if ($('#doNotShowLongWay')[0].checked) {
+          $('#shortWayToPlaceAnOffer').on('click', function (e) {
+            if (getRandomInt(1, 10000) == 8 || !youCanPlaceAnOfferBug) {
+              youCanPlaceAnOfferBug = false
+              e.stopPropagation();
+              e.preventDefault();
+            } else {
+              $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+              $.ajax({
+                //url: window.location.href,
+                method: "POST",
+                data: { AuctionID: {{.AuctionID }},
+                Offer: Number($('#newPrice')[0].value.replace(/\s/g, '')),
+                Participant: 'Акционерное Общество "Третий парк"',
+                Method: 'PlaceAnOffer',
+                LastBidTime: timeOfLastOffer
+                },
+
+                success: function (data) {
+                  console.log(data)
+                  pageUpdateFromAjax(data)
+                },
+              });
+              // beforePlacingAnOffer(true, 0)
+            }
+          })
+        }
+    //   $('#currentPrice')[0].innerText = localeString(storedDataParsedOnce.currentPrice)
+    //   currentPrice = Number(storedDataParsedOnce.currentPrice)
+    //   n = storedDataParsedOnce.n
+    //   distanceBetweenStoredDataTimeAndNow = new Date().getTime() - storedDataParsedOnce.currentTime
+    //   t = storedDataParsedOnce.durationOfCurrentAuction + Math.floor((distanceBetweenStoredDataTimeAndNow % (1000 * 60)) / 1000)
+    //   countDownDate = storedDataParsedOnce.countDownDate
+
+
+
+    //   storedDataAfterOffer = JSON.parse(localStorage.getItem({{.AuctionID }} + '_aferOffer'))
+    // if (storedDataAfterOffer != null) {
+      // $('#doNotShowLongWay')[0].checked = storedDataAfterOffer.doNotShowLongWay
+      // if ($('#doNotShowLongWay')[0].checked) {
+      //   $('#shortWayToPlaceAnOffer').on('click', function (e) {
+      //     if (getRandomInt(1, 10) > 8 || !youCanPlaceAnOfferBug) {
+      //       youCanPlaceAnOfferBug = false
+      //       e.stopPropagation();
+      //       e.preventDefault();
+      //     } else {
+      //       $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+
+      //       beforePlacingAnOffer(true, 0)
+      //     }
+      //   })
+      // }
+    //   currentFallNumber = storedDataAfterOffer.currentFallNumber
+    //   $('#currentFall')[0].innerText = currentFallNumber + '%'
+    //   $('.progress-bar').css('width', currentFallNumber + '%')
+    //   timeOfYourLastOffer = storedDataAfterOffer.timeOfYourLastOffer
+    //   $('#yourLastOffer')[0].innerText = storedDataAfterOffer.yourLastOffer
+    //   $('#bestPretendent')[0].innerText = storedDataAfterOffer.bestPretendent
+    //   $('#timeOfBestOffer')[0].innerText = storedDataAfterOffer.timeOfBestOffer
+    //   $('#sumOfBestOffer')[0].innerText = storedDataAfterOffer.sumOfBestOffer
+    //   $('#numberOfOffers')[0].innerText = storedDataAfterOffer.numberOfOffers
+    //   if ($('#bestPretendent')[0].innerText == 'Акционерное Общество "Третий парк"') {
+    //     $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').hide();
+    //     $('#youCanMakeAnOfferFromFromToTo').hide();
+    //     $('#youCantMakeAnOffer').show();
+    //   } else {
+    //     // $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').show();
+    //     $('#youCanMakeAnOfferFromFromToTo').show();
+    //     $('#youCantMakeAnOffer').hide();
+    //   }
+
+    //   fromCurrentPricePlusOneAndHalfPercent = storedDataAfterOffer.fromCurrentPricePlusOneAndHalfPercent
+    //   toCurrentPrice = storedDataAfterOffer.toCurrentPrice
+
+
+    //   fromCurrentPricePlusOneAndHalfPercent = localeString(roundUp(Number(currentPrice) + halfPercent, 2))
+    //   toCurrentPrice = localeString(currentPrice)
+    //   $('#fromCurrentPricePlusOneAndHalfPercent')[0].innerText = fromCurrentPricePlusOneAndHalfPercent
+    //   $('#toCurrentPrice')[0].innerText = toCurrentPrice
+
+
+    //   storedActiveOffers = JSON.parse(storedDataAfterOffer.activeOffers)
+    //   dataArrayForChart = JSON.parse(storedDataAfterOffer.dataArrayForChart)
+
+    //   dataArray = dataArrayForChart
+    //   setChart(dataArray)
+
+    //   arrayOfOffers = storedActiveOffers
+    //   storedActiveOffers.sort(function (a, b) { return a.numberForSorting - b.numberForSorting })
+    //   var storedArrayLength = storedActiveOffers.length;
+    //   for (var i = 0; i < storedArrayLength; i++) {
+    //     var tr = '<tr>\
+    //       <th scope="row"> # </th>\
+    //       <td>'+ storedActiveOffers[i].participant + '</td>\
+    //       <td>'+ localeString(storedActiveOffers[i].offer) + '</td>\
+    //       <td>'+ storedActiveOffers[i].date.toLocaleString('ru', options) + '</td>\
+    //       </tr>';
+    //     $('#table').prepend(tr);
+
+    //   }
+    //   numberToCalculateYourCurrentPosition = Number($('#yourLastOffer')[0].innerText.replace(/\s/g, ''))
+    //   arrayOfOffers.sort(function (a, b) { return a.offer - b.offer })
+
+    //   for (var i = 0; i < arrayOfOffers.length; i++) {
+    //     // console.log(numberToCalculateYourCurrentPosition,arrayOfOffers[i].offer,timeOfYourLastOffer,arrayOfOffers[i].date)
+    //     if ((numberToCalculateYourCurrentPosition == arrayOfOffers[i].offer)
+    //       && (timeOfYourLastOffer == arrayOfOffers[i].date)) {
+    //       yourCurrentPositionValue = i + 1
+    //       $('#yourCurrentPosition')[0].innerText = yourCurrentPositionValue
+    //       break
+    //     }
+    //   }
+    // }
+    }else{
+      $('#setPageUpdatePeriod')[0].value = 59
+    }
+
+    
+    var countDownUpdate = dUpdate.addSeconds(Number($('#setPageUpdatePeriod')[0].value) + 2).getTime();
+
+    
+    
+    $('#setNewPageUpdatePeriod').on('click', function (e) {
+      if (Number($('#setPageUpdatePeriod')[0].value) < 10) $('#setPageUpdatePeriod')[0].value = 10
+    })
+    $('#pageUpdateNow').on('click', function (e) {
+      location.reload();
+    })
+
+    $('#setPageUpdatePeriod').on('keydown', function (e) {
+      var prevValue = $(this)[0].value;
+      setTimeout(function () {
+        var price = $('#setPageUpdatePeriod')[0]
+        if (price.value.trim() === "") {
+          price.value = prevValue
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\d{0})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+
+          }
+        }
+        return true;
+      }, 1);
+    })
+    var offerFromRangeValue
+    offerFromRangeValue = Number($('#customRange1')[0].value)
+    function changeOffer(offerFromRangeValue) {
+      $('#offerFromRange')[0].innerText = localeString(roundUp((offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) /100, 2))
+    $('#newPrice')[0].value = roundUp(currentPrice - (offerFromRangeValue * Number({{.InitialPrice}}.replace(/[^0-9.]/g, ""))) / 100, 2)
+    }
+    $('#offerFromRange')[0].innerText = localeString(roundUp((offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) / 100, 2))
+    $('#newPrice')[0].value = roundUp(currentPrice - (offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) / 100, 2)
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+    String.prototype.toHHMMSS = function () {
+      var sec_num = parseInt(this, 10); // don't forget the second param
+      var hours = Math.floor(sec_num / 3600);
+      var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+      var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+      if (hours < 10) { hours = "0" + hours; }
+      if (minutes < 10) { minutes = "0" + minutes; }
+      if (seconds < 10) { seconds = "0" + seconds; }
+      return hours + ':' + minutes + ':' + seconds;
+    }
+    let timer; // пока пустая переменная
+    // let t = 0; // стартовое значение обратного отсчета
+    var activeAuction
+    // var dataArray = [];
+    // console.log({{.Status}})
+    // console.log({{.BiddingDuration}})
+    if ({{.Status}} != "Подведение итогов"){
+      countdown(); // вызов функции
+      function countdown() {  // функция обратного отсчета
+        activeAuction = new Object();
+        activeAuction.pageUpdatePeriod = $('#setPageUpdatePeriod')[0].value
+        activeAuction.currentPrice = currentPrice;
+        activeAuction.durationOfCurrentAuction = t;
+        activeAuction.countDownDate = countDownDate;
+        activeAuction.n = n;
+        activeAuction.currentTime = new Date().getTime()
+        activeAuction.doNotShowLongWay = $('#doNotShowLongWay')[0].checked
+        dataToBeStored = JSON.stringify(activeAuction)
+        localStorage.setItem({{.AuctionID}}, dataToBeStored);
+
+        newRandNum = getRandomInt(1, 10000)
+        if (newRandNum == 1) {
+          fullStopYourComputerIsLagging = true
+          clearTimeout(timer);
+          clearInterval(xTimer);
+          clearInterval(updateTimer);
+          
+        } else {
+          document.getElementById('rocket').innerHTML = t.toString().toHHMMSS();
+          t++;
+          timer = setTimeout(countdown, 1000);
+        }
+      }
+    }else{
+            document.getElementById('rocket').innerHTML = {{.BiddingDuration}}
+    }
+  </script>
+  <script>
+    var xTimer = setInterval(function () {
+      // Get today's date and time
+      var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      distance = countDownDate - now;
+  
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      minutes = checkTime(minutes)
+      seconds = checkTime(seconds)
+      // Display the result in the element with id="demo"
+      //document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById("demo").innerHTML = minutes + ":" + seconds;
+      // If the count down is finished, write some text
+      if (distance < 0 || document.getElementById("demo").innerHTML == "EXPIRED") {
+        $.ajax({
+          //url: window.location.href,
+          method: "POST",
+          data: { AuctionID: {{.AuctionID }},
+          Participant: 'Акционерное Общество "Третий парк"',
+          Method: 'PageUpdate',
+          LastBidTime: timeOfLastOffer
+          },
+
+        success: function (data) {
+          console.log('PageUpdate')
+          var result = JSON.parse(data);
+          updateForOffersTable = result[0].offersTable
+          if (updateForOffersTable.length == 0){
+            clearInterval(xTimer);
+            clearTimeout(timer);
+            $('#auctionIsOver').modal('show');
+            document.getElementById("demo").innerHTML = "EXPIRED";
+            // localStorage.removeItem({{.AuctionID }})
+            // localStorage.removeItem({{.AuctionID }} + '_aferOffer')
+          }else{
+            pageUpdateFromAjax(data)
+          }
+          
+        },
+      });
+
+      }
+    }, 1000);
+
+ 
+    var updateTimer = setInterval(function () {
+      // Get today's date and time
+      var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      updateDistance = countDownUpdate - now;
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(updateDistance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((updateDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((updateDistance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((updateDistance % (1000 * 60)) / 1000);
+      minutes = checkTime(minutes)
+      seconds = checkTime(seconds)
+      // Display the result in the element with id="demo"
+      //document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById("nextPageUpdateTime").innerHTML = minutes + ":" + seconds;
+      // If the count down is finished, write some text
+      if (updateDistance <= 1) {
+        document.getElementById("nextPageUpdateTime").innerHTML = "00:00";
+        countDownUpdate = dUpdate.addSeconds(Number($('#setPageUpdatePeriod')[0].value) + 1).getTime()
+        $.ajax({
+          //url: window.location.href,
+          method: "POST",
+          data: { AuctionID: {{.AuctionID }},
+          Participant: 'Акционерное Общество "Третий парк"',
+          Method: 'PageUpdate',
+          LastBidTime: timeOfLastOffer
+          },
+
+        success: function (data) {
+          console.log('PageUpdate')
+          pageUpdateFromAjax(data)
+        },
+      });
+      }
+    }, 1000);
+
+    function pageUpdateFromAjax(data){
+        var result = JSON.parse(data);
+        t = result[0].BidDuration
+        var updateNumberOfOffersInATableOfOffers = numberOfOffersInATableOfOffers
+        updateForOffersTable = result[0].offersTable
+        for (var i = 0; i < updateForOffersTable.length; i++) {
+          timeOfLastOffer = updateForOffersTable[i].BidTime
+          if (updateForOffersTable[i].Participant != "Акционерное Общество \"Третий парк\""){
+            participantName = "Участник " + updateForOffersTable[i].Participant
+            $('#PlaceAnOffer')[0].disabled = false
+          }else{
+            participantName = updateForOffersTable[i].Participant
+            $('#PlaceAnOffer')[0].disabled = true
+          }        
+          var tr = '<tr>\
+            <th scope="row"> # </th>\
+            <td>'+ participantName + '</td>\
+            <td>'+ updateForOffersTable[i].Bid + '</td>\
+            <td>'+ timeConverter(updateForOffersTable[i].BidTime) + '</td>\
+            </tr>';
+          $('#table').prepend(tr);
+          updateNumberOfOffersInATableOfOffers += 1
+          var obj = CreateObject(updateNumberOfOffersInATableOfOffers, Number(updateForOffersTable[i].Bid.replace(/[^0-9.]/g, ""))); 
+          dataArray.push(obj);
+        }
+        if (updateForOffersTable.length > 0) setChart(dataArray)
+        numberOfOffersInATableOfOffers = updateNumberOfOffersInATableOfOffers
+
+        //     console.log(result)
+        //     $('#toCurrentPrice')[0].innerText = result[0].CurrentPrice
+             currentFallNumber = roundUp(result[0].CurrentFall, 2)
+
+        //     console.log(result[0].CurrentPrice)
+        //     console.log(startPrice)
+
+             $('#currentFall')[0].innerText = currentFallNumber + '%'
+
+    
+              $('.progress-bar').css('width', currentFallNumber + '%')
+              $('#bestPretendent')[0].innerText = 'Акционерное Общество "Третий парк"'
+              $('#offerFromRange')[0].innerText = localeString(roundUp((offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) /100, 2))
+              
+              currentPrice = Number(result[0].CurrentPrice.replace(/[^0-9.]/g, ""))
+              if (result[0].thereWasOffersBefore){
+                $('#currentPrice')[0].innerText = result[0].CurrentPrice
+                if (result[0].BestPretendentName != "Акционерное Общество \"Третий парк\""){
+                  bestParticipantName = "Участник " + result[0].BestPretendentName
+                }else{
+                  bestParticipantName = result[0].BestPretendentName
+                }
+                $('#bestPretendent')[0].innerText = bestParticipantName
+                $('#timeOfBestOffer')[0].innerText = timeConverter(result[0].lastOfferTime)
+                $('#sumOfBestOffer')[0].innerText = localeString(result[0].BestPretendentBid)
+                unix_timestamp = result[0].lastOfferTime
+              }else{
+                unix_timestamp = result[0].BiddingStart
+              }
+              if (result[0].thereWasYourOffer){
+                $('#yourCurrentPosition')[0].innerText = result[0].YourCurrentPosition
+                $('#yourLastOffer')[0].innerText = localeString(result[0].YourLastOffer)
+              }
+              date = new Date(unix_timestamp * 1000);
+              countDownDate = date.addMinutes(10).addSeconds(1).getTime();    
+              updateNumberOfOffers = Number($('#numberOfOffers')[0].innerText) + Number({{.AmountOfOffersThatWerePosted}})
+              // updateNumberOfOffers = Number({{.AmountOfOffersThatWerePosted}})
+              $('#numberOfOffers')[0].innerText = updateNumberOfOffers
+              $('#finishTime')[0].innerText = new Date(countDownDate).toLocaleString('ru', options)
+              $('#newPrice')[0].value = roundUp(currentPrice - (offerFromRangeValue * Number({{.InitialPrice}}.replace(/[^0-9.]/g, ""))) / 100, 2)
+              // console.log(Number({{.AmountOfOffersThatWerePosted}}) )
+    }
+  </script>
+  <script>
+    speedUpTheAuctionTips = false
+    speedUpTheAuction = false
+    yourCurrentPositionValue = 0
+    // $('#newPrice')[0].value = 0
+    // halfPercent = startPrice / 200;
+    // fivePercent = startPrice / 20;
+    priceFrom = roundUp(currentPrice - halfPercent, 2)
+    priceTo = roundUp(currentPrice - fivePercent, 2)
+    // $('#from')[0].innerText = localeString(priceFrom)
+    // $('#to')[0].innerText = localeString(priceTo)
+    // $('#doNotShowLongWay')[0].checked = false
+    $('#finishTime')[0].innerText = new Date(countDownDate).toLocaleString('ru', options)
+
+
+
+    $('#retrurnToAuctionList').on('click', function (e) {
+      localStorage.removeItem({{.AuctionID }})
+    localStorage.removeItem({{.AuctionID }} + '_aferOffer')
+          // window.location.replace("/http_handler/ListOfAuctions");
+    })
+    $('#auctionList').on('click', function (e) {
+      if (fullStopYourComputerIsLagging) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    })
+    // $('#from').on('click', function (e) {
+    //   if (!fullStopYourComputerIsLagging) {
+    //     $('#newPrice')[0].value = Number(e.currentTarget.innerText.replace(/[^0-9.]/g, ""))
+    //   }
+    // })
+    $('#to').on('click', function (e) {
+      if (!fullStopYourComputerIsLagging) {
+        $('#newPrice')[0].value = Number(e.currentTarget.innerText.replace(/[^0-9.]/g, ""))
+      }
+    })
+
+    $('#fromCurrentPricePlusOneAndHalfPercent').on('click', function (e) {
+      if (!fullStopYourComputerIsLagging) {
+        $('#newPrice')[0].value = Number(e.currentTarget.innerText.replace(/[^0-9.]/g, ""))
+      }
+    })
+    $('#toCurrentPrice').on('click', function (e) {
+      if (!fullStopYourComputerIsLagging) {
+        $('#newPrice')[0].value = Number(e.currentTarget.innerText.replace(/[^0-9.]/g, ""))
+      }
+    })
+    $('#speedUp').on('click', function (e) {
+      speedUpTheAuction = !speedUpTheAuction
+      d = new Date();
+      countDownDate = d.addMinutes(10).addSeconds(1).getTime();
+      timeToActForParticipants()
+      if (speedUpTheAuction) {
+        $('#speedUp')[0].className = $('#speedUp')[0].className + ' active'
+      } else if (!speedUpTheAuction) {
+        $('#speedUp')[0].className = $('#speedUp')[0].className.replace(" active", "")
+      }
+      $('#finishTime')[0].innerText = new Date(countDownDate).toLocaleString('ru', options)
+    })
+    $('#speedUpTips').on('click', function (e) {
+      speedUpTheAuctionTips = !speedUpTheAuctionTips
+      if (speedUpTheAuctionTips) {
+        $('#speedUpTips')[0].className = $('#speedUpTips')[0].className + ' active'
+      } else if (!speedUpTheAuction) {
+        $('#speedUpTips')[0].className = $('#speedUpTips')[0].className.replace(" active", "")
+      }
+    })
+    var yourCurrentPrice
+    function placeAnOffer(itIsABestOffer) {
+      timeOfYourLastOffer = new Date()
+      arrayOfOffers.push(CreateObjectOfOffersAndTime('Акционерное Общество "Третий парк"', Number($('#newPrice')[0].value), timeOfYourLastOffer, true))
+      n = n + 1
+      $('#numberOfOffers')[0].innerText = n
+      var tr = '<tr>\
+          <th scope="row"> # </th>\
+          <td>Акционерное Общество "Третий парк"</td>\
+          <td>'+ localeString($('#newPrice')[0].value) + '</td>\
+          <td>'+ new Date().toLocaleString('ru', options) + '</td>\
+          </tr>';
+      $('#table').prepend(tr);
+      if (itIsABestOffer) {
+        $('#currentPrice')[0].innerText = localeString($('#newPrice')[0].value)
+        $('#PlaceAnOffer')[0].disabled = true
+      } else $('#PlaceAnOffer')[0].disabled = false
+      // currentPrice = $('#currentPrice')[0].innerText.replace(/[^0-9.]/g, "")
+      yourCurrentPrice = currentPrice
+      priceFrom = roundUp(currentPrice - halfPercent, 2)
+      priceTo = roundUp(currentPrice - fivePercent, 2)
+      if (itIsABestOffer) {
+        // $('#from')[0].innerText = localeString(priceFrom)
+        // $('#to')[0].innerText = localeString(priceTo)
+      }
+      $('#yourLastOffer')[0].innerText = localeString($('#newPrice')[0].value)
+      if (itIsABestOffer) {
+        $('#sumOfBestOffer')[0].innerText = localeString(currentPrice)
+      }
+      d = new Date();
+      if (itIsABestOffer) {
+        $('#timeOfBestOffer')[0].innerText = d.toLocaleString('ru', options)
+        countDownDate = d.addMinutes(10).addSeconds(1).getTime();
+      }
+      $('#finishTime')[0].innerText = new Date(countDownDate).toLocaleString('ru', options)
+      currentFallNumber = roundUp(100 - currentPrice * 100 / startPrice, 2)
+      if (itIsABestOffer) {
+        $('#currentFall')[0].innerText = currentFallNumber + '%'
+        $('.progress-bar').css('width', currentFallNumber + '%')
+        $('#bestPretendent')[0].innerText = 'Акционерное Общество "Третий парк"'
+        $('#offerFromRange')[0].innerText = localeString(roundUp((offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) /100, 2))
+      $('#newPrice')[0].value = roundUp(currentPrice - (offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) / 100, 2)
+      }
+
+      // $('#newPrice')[0].value = 0
+    }
+    youCanPlaceAnOfferBug = true
+    $('#PlaceAnOffer').on('click', function (e) {
+
+
+
+
+      if (!fullStopYourComputerIsLagging) {
+
+        if (youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent) {
+          if (((Number($('#newPrice')[0].value.replace(/\s/g, '')) >= Number(toCurrentPrice.replace(/\s/g, ''))
+            && Number($('#newPrice')[0].value.replace(/\s/g, '')) <= Number(fromCurrentPricePlusOneAndHalfPercent.replace(/\s/g, '')))
+            || ($('#newPrice')[0].value >= priceTo && $('#newPrice')[0].value <= priceFrom))
+            && (document.getElementById("demo").innerHTML != "EXPIRED")) {
+            $('#PlaceAnOffer')[0].dataset.target = "#yourOffer"
+
+          } else {
+            $('#PlaceAnOffer')[0].dataset.target = "#"
+          }
+        } else if (!youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent) {
+          if (($('#newPrice')[0].value >= priceTo && $('#newPrice')[0].value <= priceFrom) && (document.getElementById("demo").innerHTML != "EXPIRED")) {
+            $('#PlaceAnOffer')[0].dataset.target = "#yourOffer"
+
+          } else {
+            $('#PlaceAnOffer')[0].dataset.target = "#"
+          }
+        }
+        // $('#docNumber')[0].innerText 
+        $('#yoursOfferPrice')[0].innerText = $('#newPrice')[0].value
+        $('#timeOfAnOffer')[0].innerText = new Date().toLocaleString('ru', options)
+      } else $('#PlaceAnOffer')[0].dataset.target = "#"
+    })
+    $('#longWayToPlaceAnOffer').on('click', function (e) {
+
+      $.ajax({
+        //url: window.location.href,
+        method: "POST",
+        data: { AuctionID: {{.AuctionID }},
+        Offer: Number($('#newPrice')[0].value.replace(/\s/g, '')),
+        Participant: 'Акционерное Общество "Третий парк"',
+        Method: 'PlaceAnOffer',
+        LastBidTime: timeOfLastOffer
+        },
+
+        success: function (data) {
+          console.log(data)
+          pageUpdateFromAjax(data)
+        },
+      });
+    }
+    )
+
+    $('#newPrice').on('keydown', function (e) {
+      var prevValue = $(this)[0].value;
+      setTimeout(function () {
+        var price = $('#newPrice')[0]
+        if (price.value.trim() === "") {
+          price.value = 0
+          return false;
+        }
+        if (price.value !== "") {
+          if (!(/^\d*(?:\.\d{0,2})?$/.test(price.value))) {
+            price.value = prevValue;
+            return false;
+
+          }
+        }
+        return true;
+      }, 1);
+    })
+
+    var numberOfParticipants
+    var participants
+    function createParticipants() {
+      numberOfParticipants = getRandomInt(1, 9)
+      //participants = new Map();
+      participants = []
+      for (let i = 0; i <= numberOfParticipants; i++) {
+        chanceOfOfferToBeMoreThanFiftyPerscents = getRandomInt(1, 7)
+        if (chanceOfOfferToBeMoreThanFiftyPerscents == 1) {
+          offerOfAParticipant = getRandomInt(0, 9)
+          participants.push(offerOfAParticipant)
+          //participants.set(i, offerOfAParticipant);
+        } else if (chanceOfOfferToBeMoreThanFiftyPerscents < 5) {
+          offerOfAParticipant = getRandomInt(10, 19)
+          participants.push(offerOfAParticipant)
+        } else {
+          // offerOfAParticipant = getRandomInt(20, 24)
+          offerOfAParticipant = getRandomArbitary(20, 24.4)
+
+          participants.push(offerOfAParticipant)
+        }
+      }
+    }
+    createParticipants()
+    var timeToAct
+    function timeToActForParticipants() {
+
+      //timeToAct = new Map();
+      timeToAct = []
+      for (let i = 0; i <= numberOfParticipants; i++) {
+        chanceToActAtStartOfTheTurn = getRandomInt(1, 5)
+        //
+        if (speedUpTheAuction) {
+          timeToActForParticipant = getRandomInt(570, 600)//getRandomInt(1, 120)
+        } else if (!speedUpTheAuction) {
+          if (chanceToActAtStartOfTheTurn != 1) {
+            timeToActForParticipant = getRandomInt(1, 600)//getRandomInt(520, 600)
+          } else if (chanceToActAtStartOfTheTurn == 2) {
+            timeToActForParticipant = getRandomInt(1, 120)
+          } else {
+            timeToActForParticipant = getRandomInt(1, 10)
+          }
+        }
+        timeToAct.push(timeToActForParticipant);
+        //timeToAct.set(i, timeToActForParticipant);
+        // } else {
+        //   if (speedUpTheAuction){
+        //     timeToActForParticipant = getRandomInt(570, 600)//getRandomInt(1, 120)
+        //   }else if(!speedUpTheAuction){
+        //     timeToActForParticipant = getRandomInt(1, 600)//getRandomInt(520, 600)
+        //   }
+        //   timeToAct.push(timeToActForParticipant);
+        // }
+      }
+    }
+    timeToActForParticipants()
+
+    var fromCurrentPricePlusOneAndHalfPercent
+    var toCurrentPrice
+    var participantsThatHasActed = []
+    var youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent
+    var priceForChart
+
+    function beforePlacingAnOffer(thisIsUser, numberOfParticipant) {
+      if (thisIsUser) {
+        price = $('#newPrice')[0]
+        if (youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent) {
+          if ((Number(price.value) < Number(toCurrentPrice.replace(/\s/g, '')) || Number(price.value) > Number(fromCurrentPricePlusOneAndHalfPercent.replace(/\s/g, '')))
+            && (Number(price.value) < priceTo || Number(price.value) > priceFrom)) {
+            $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsDenied"
+            $('#longWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsDenied"
+            priceForChart = price.value
+            placeAnOffer(false)
+
+          } else {
+            $('#PlaceAnOffer')[0].dataset.target = "#"
+            $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+            $('#longWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+            priceForChart = price.value
+            placeAnOffer(price.value != currentPrice)
+
+            $('#youCanMakeAnOfferFromFromToTo').hide();
+            $('#youCantMakeAnOffer').show();
+            if (((Number(price.value) >= priceFrom && Number(price.value) <= priceTo))
+              && ($('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').css('display') != 'none' || $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').css("visibility") != "hidden")) {
+              $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').hide();
+            }
+          }
+        } else if (!youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent) {
+          yourCurrentPositionValue = 1
+          if (Number(price.value) < priceTo || Number(price.value) > priceFrom) {
+            priceForChart = price.value
+            $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsDenied"
+            $('#longWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsDenied"
+            placeAnOffer(false)
+          } else {
+            priceForChart = price.value
+            $('#PlaceAnOffer')[0].dataset.target = "#"
+            $('#shortWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+            $('#longWayToPlaceAnOffer')[0].dataset.target = "#yourOfferIsAccepted"
+            placeAnOffer(price.value != currentPrice)
+            $('#youCanMakeAnOfferFromFromToTo').hide();
+            $('#youCantMakeAnOffer').show();
+          }
+        }
+
+        //$('#yourCurrentPosition')[0].innerText = yourCurrentPositionValue
+      } else {
+
+        $('#youCanMakeAnOfferFromFromToTo').show();
+        $('#youCantMakeAnOffer').hide();
+        arrayLength = participantsThatHasActed.length
+        participantHasActed = false
+
+        for (var i = 0; i < arrayLength; i++) {
+          if (participantsThatHasActed[i] == numberOfParticipant && !participantsThatHasActed) {
+            participantHasActed = true
+          }
+        }
+
+        if (!participantHasActed) {
+          participantsThatHasActed.push(i)
+        }
+
+        // if ($('#bestPretendent')[0].innerText != 'Акционерное Общество "Третий парк"') {
+        // if (participantsThatHasActed.length == 1 && $('#bestPretendent')[0].innerText == 'Акционерное Общество "Третий парк"') {
+        // $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').show();
+        youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercent = true
+        fromCurrentPricePlusOneAndHalfPercent = localeString(roundUp(Number(currentPrice) + halfPercent, 2))
+        toCurrentPrice = localeString(currentPrice)
+        $('#fromCurrentPricePlusOneAndHalfPercent')[0].innerText = fromCurrentPricePlusOneAndHalfPercent
+        $('#toCurrentPrice')[0].innerText = toCurrentPrice
+        // } else {
+        //   $('#youCanPlaceOfferWithCurrentPricePlusOneAndHalfPercentElem').hide();
+        // }
+        participantAct(numberOfParticipant)
+        if (Number(yourCurrentPrice) > Number(currentPrice)) {
+          //yourCurrentPositionValue = yourCurrentPositionValue + 1
+          //$('#yourCurrentPosition')[0].innerText = yourCurrentPositionValue
+        }
+        priceForChart = currentPrice
+        timeToActForParticipants()
+      }
+      var obj = CreateObject(n, Number(priceForChart)); //add other params if you need
+      dataArray.push(obj);
+      setChart(dataArray)
+
+      numberToCalculateYourCurrentPosition = Number($('#yourLastOffer')[0].innerText.replace(/\s/g, ''))
+      arrayOfOffers.sort(function (a, b) { return a.offer - b.offer })
+      // arrayOfOffers.sort(function (a, b) {
+      //   // Turn your strings into dates, and then subtract them
+      //   // to get a value that is either negative, positive, or zero.
+      //   return new Date(b.date) - new Date(a.date)
+      // });
+      // console.log('----------------------------------------------')
+      var currentTime = new Date()
+      for (var i = 0; i < arrayOfOffers.length; i++) {
+        // console.log(i)
+        // console.log(numberToCalculateYourCurrentPosition <= arrayOfOffers[i].offer)
+        //   && (timeOfYourLastOffer = arrayOfOffers[i].date)
+        if (typeof timeOfYourLastOffer === 'undefined') {
+          console.log('timeOfYourLastOffer is undefined')
+          timeOfYourLastOffer = currentTime
+        }
+        //console.log(numberToCalculateYourCurrentPosition, arrayOfOffers[i].offer, timeOfYourLastOffer, arrayOfOffers[i].date)
+        if ((numberToCalculateYourCurrentPosition == arrayOfOffers[i].offer)
+          && (timeOfYourLastOffer.toLocaleString('ru', options) == arrayOfOffers[i].date)) {
+          // console.log(i, arrayOfOffers[i].offer, arrayOfOffers[i].date, arrayOfOffers[i].isUser)
+          yourCurrentPositionValue = i + 1
+          $('#yourCurrentPosition')[0].innerText = yourCurrentPositionValue
+          break
+        }
+      }
+
+      activeAuctioAfterOffer = new Object();
+      activeAuctioAfterOffer.activeOffers = JSON.stringify(arrayOfOffers)
+      activeAuctioAfterOffer.dataArrayForChart = JSON.stringify(dataArray)
+      activeAuctioAfterOffer.currentFallNumber = currentFallNumber
+      activeAuctioAfterOffer.yourLastOffer = $('#yourLastOffer')[0].innerText
+      activeAuctioAfterOffer.timeOfYourLastOffer = timeOfYourLastOffer.toLocaleString('ru', options)
+      activeAuctioAfterOffer.bestPretendent = $('#bestPretendent')[0].innerText
+      activeAuctioAfterOffer.timeOfBestOffer = $('#timeOfBestOffer')[0].innerText
+      activeAuctioAfterOffer.sumOfBestOffer = $('#sumOfBestOffer')[0].innerText
+      activeAuctioAfterOffer.numberOfOffers = $('#numberOfOffers')[0].innerText
+
+      activeAuctioAfterOffer.fromCurrentPricePlusOneAndHalfPercent = fromCurrentPricePlusOneAndHalfPercent
+      activeAuctioAfterOffer.toCurrentPrice = toCurrentPrice
+      activeAuctioAfterOffer.doNotShowLongWay = $('#doNotShowLongWay')[0].checked
+
+      dataToBeStoredAfterOffer = JSON.stringify(activeAuctioAfterOffer)
+
+      localStorage.setItem({{.AuctionID }} + '_aferOffer', dataToBeStoredAfterOffer);
+    }
+
+    // var dataArray = [];
+    // var CreateObject = function (i, j) {
+    //   var myObj = new Object();
+    //   myObj.x = i;
+    //   myObj.y = j;
+    //   return myObj
+    // }
+    // var CreateObjectOfOffersAndTime = function (nameOfPartisipant, i, j, q) {
+    //   var myObj = new Object();
+    //   myObj.numberForSorting = arrayOfOffers.length
+    //   myObj.participant = nameOfPartisipant;
+    //   myObj.offer = i;
+    //   myObj.date = j.toLocaleString('ru', options);
+    //   myObj.isUser = q;
+    //   return myObj
+    // }
+    function participantAct(numberOfParticipant) {
+      $('#PlaceAnOffer')[0].disabled = false
+      numberOfParticipant = numberOfParticipant + 1
+      //alert("participantAct")
+      //if (participants.get(numberOfParticipant) > currentFallNumber) {
+      n = n + 1
+      $('#numberOfOffers')[0].innerText = n
+      chanceToPlaceARandomOffer = getRandomInt(1, 4)
+      if (chanceToPlaceARandomOffer == 1 && currentFallNumber < 20) {
+        offerOfParticipant = roundUp(getRandomArbitary(priceFrom, priceTo), 2)
+      } else {
+        offerOfParticipant = priceFrom
+      }
+      var tr = '<tr>\
+          <th scope="row"> # </th>\
+          <td>' + 'Участник ' + numberOfParticipant + '</td>\
+          <td>'+ localeString(offerOfParticipant) + '</td>\
+          <td>'+ new Date().toLocaleString('ru', options) + '</td>\
+          </tr>';
+      $('#table').prepend(tr);
+      $('#currentPrice')[0].innerText = localeString(offerOfParticipant)
+      currentPrice = $('#currentPrice')[0].innerText.replace(/[^0-9.]/g, "")
+      // startPrice = $('#startPrice')[0].innerText.replace(/[^0-9.]/g, "")
+      // halfPercent = startPrice / 200;
+      // fivePercent = startPrice / 20;
+      priceFrom = roundUp(currentPrice - halfPercent, 2)
+      priceTo = roundUp(currentPrice - fivePercent, 2)
+      // $('#from')[0].innerText = localeString(priceFrom)
+      // $('#to')[0].innerText = localeString(priceTo)
+      //$('#yourLastOffer')[0].innerText = localeString(currentPrice)
+      $('#sumOfBestOffer')[0].innerText = localeString(currentPrice)
+      var d = new Date();
+      $('#timeOfBestOffer')[0].innerText = d.toLocaleString('ru', options)
+      countDownDate = d.addMinutes(10).addSeconds(1).getTime();
+      $('#finishTime')[0].innerText = new Date(countDownDate).toLocaleString('ru', options)
+      currentFallNumber = roundUp(100 - currentPrice * 100 / startPrice, 2)
+      $('#currentFall')[0].innerText = currentFallNumber + '%'
+      $('.progress-bar').css('width', currentFallNumber + '%')
+      $('#bestPretendent')[0].innerText = 'Участник ' + numberOfParticipant
+      //}
+      //var currentTime = new Date()
+      arrayOfOffers.push(CreateObjectOfOffersAndTime('Участник ' + numberOfParticipant, offerOfParticipant, new Date(), false))
+      $('#offerFromRange')[0].innerText = localeString(roundUp((offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) /100, 2))
+    $('#newPrice')[0].value = roundUp(currentPrice - (offerFromRangeValue * Number({{.InitialPrice }}.replace(/[^0-9.]/g, ""))) / 100, 2)
+    }
+
+
+
+    function fy(a, b, c, d) {//array,placeholder,placeholder,placeholder
+      c = a.length; while (c) b = Math.random() * c-- | 0, d = a[c], a[c] = a[b], a[b] = d
+      return a
+    }
+
+    // var participantsActions = function () {
+    //   if (youCanPlaceAnOfferBug) {
+    //     lengthOfArray = timeToAct.length
+    //     timeToActShuffled = fy(timeToAct, lengthOfArray)
+    //     var arrayLength = lengthOfArray;
+    //     for (var i = 0; i < arrayLength; i++) {
+    //       if ((timeToActShuffled[i] == roundUp(distance / 1000, 0))
+    //         && (participants[i] > currentFallNumber)
+    //         && ($('#bestPretendent')[0].innerText != 'Участник ' + (i + 1))) {
+    //         beforePlacingAnOffer(false, i)
+    //         break
+    //       }
+    //     }
+    //   }
+    // }
+    // setInterval(participantsActions, 1000);
+
+  </script>
+  <nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Разработчик: Ермешев Марат, АО "Третий парк", ErmMarat@gmail.com</a>
+  </nav>
+</body>
+
+</html>

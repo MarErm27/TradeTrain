@@ -1,0 +1,47 @@
+{
+  "display_name": "Auction Version",
+  "fields": {
+    "Auction": {
+      "display_name": "Auction",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Date": {
+      "display_name": "Date",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "FallLimit": {
+      "display_name": "Fall Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Number": {
+      "display_name": "Number",
+      "help": "version number",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "PersonResponsibleForLimit": {
+      "display_name": "Person Responsible For Limit",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}
